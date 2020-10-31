@@ -103,7 +103,7 @@
   <div class="menu">
     <button id="HtmlButton1">Etichette</button>
     <button id="HtmlButton2">Binari</button>
-    <button id="HtmlButton3">Tragitto</button>
+    <button id="HtmlButton3">Piacenza-Bettola</button>
     <button id="HtmlButton4">Mappe</button>
     <button id="HtmlButton5">Vista Satellitare</button>
   </div>
@@ -263,9 +263,11 @@
         var visibility = map.getLayoutProperty('Etichette', 'visibility');
         if (visibility === 'none') {
             map.setLayoutProperty('Etichette', 'visibility', 'visible');
+            map.setLayoutProperty('Etichette Zoom', 'visibility', 'visible');
             button1.className = 'active';
         } else {
             map.setLayoutProperty('Etichette', 'visibility', 'none');
+            map.setLayoutProperty('Etichette Zoom', 'visibility', 'none');
             button1.className = '';
         }
       };
