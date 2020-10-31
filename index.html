@@ -1,0 +1,416 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <script type="text/javascript" src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css">
+
+  <style id="compiled-css" type="text/css">
+
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+  	#map { position: fixed; top: 0; bottom: 0; width: 60%; }
+
+    .menu {
+        background: #fff;
+        position: fixed;
+        z-index: 1;
+        top: 10px;
+        left: 10px;
+        border-radius: 3px;
+        width: 120px;
+        border: 1px solid rgba(0,0,0,0.4);
+        font-family: 'Open Sans', sans-serif;
+    }
+
+    button {
+        font-size: 15px;
+        color: #404040;
+        display: block;
+        margin: 0;
+        padding: 0;
+        padding: 5px;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(0,0,0,0.25);
+        text-align: center;
+        width: 100%;
+    }
+
+    button:last-child {
+        border: none;
+    }
+
+    button:hover {
+        background-color: #f8f8f8;
+        color: #404040;
+    }
+
+    button.active {
+        background-color: #3887be;
+        color: #ffffff;
+    }
+
+    button.active:hover {
+        background: #3074a4;
+    }
+
+    #features {
+        width: 40%;
+        margin-left: 60%;
+        font-family: sans-serif;
+        font-size: 15px;
+        overflow-y: scroll;
+        color: #ffffff;
+        background-color: #000000;
+    }
+
+    section {
+        padding: 25px 50px;
+        line-height: 25px;
+        margin-top: 100px;
+        border-bottom: 1px solid #ddd;
+        opacity: 1;
+    }
+
+    section.active {
+        opacity: 1;
+    }
+
+    section:first-child {
+      margin-top: 0px;
+    }
+
+    section:last-child {
+        border-bottom: none;
+        margin-bottom: 600px;
+    }
+
+    section img {
+        width: 100%;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <div id="map"></div>
+
+  <div class="menu">
+    <button id="HtmlButton1">Etichette</button>
+    <button id="HtmlButton2">Binari</button>
+    <button id="HtmlButton3">Linea Piacenza-Bettola</button>
+    <button id="HtmlButton4">Mappe</button>
+    <button id="HtmlButton5">Vista Satellitare</button>
+  </div>
+
+  <div id="features">
+      <section id="Ferrovia Piacenza-Bettola" class="active">
+          <h3>Ferrovia Piacenza-Bettola</h3>
+          <p> In questo progetto ho ordinato geograficamente il materiale
+          fotografico, sia storico sia attuale, che ho raccolto sulla dismessa
+          linea ferroviaria Piacenza-Bettola.
+          <p>Per vedere il progetto bisogna far scorrere i capitoli di testo.
+          Ogni volta che si passa a un nuovo capitolo, la vista della mappa si
+          aggiorna, mostrando la posizione descritta nel testo.
+          È possibile cambiare la vista della mappa con il controllo del mouse:
+          <li>fare click sul tasto sinistro del mouse per spostarsi
+          <li>girare il ruotino del mouse per fare zoom
+          <li>CTRL + tasto sinistro del mouse per ruotare e inclinare la vista
+          <p>I bottoni azzurri in alto a sinistra permettono di accendere/spegnere
+          i varie elementi della mappa.
+          <p>Riccardo Rocca <a href="mailto:riccardo.rocca@hotmail.com"
+          style="color:#00FFFF">(email)</a>, Novembre 2020
+      </section>
+      <section id="Stazione di Piacenza">
+          <h3>Stazione di Piacenza</h3>
+          Vista del lato d'ingresso alla Stazione (costruita nel 1880) con il
+          Bar Sorgente in primo piano (antica postazione delle guardie del dazio):
+          <img src="./images/01-Piacenza_Ferrovia-04.jpg" alt="">
+          Vista dal lato pensiline con una littorina passeggeri:
+          <img src="./images/01-Piacenza_Ferrovia-05.jpg" alt="">
+          Vista dello scalo ferroviario nel 1964, con una serie di carri per
+          il trasporto della marna proveniente dalle cave della Val Nure:
+          <img src="./images/01-Piacenza_Ferrovia-06.jpg" alt="">
+          La facciata della Stazione al tempo dei tram a vapore (TRAMWAY):
+          <img src="./images/01-Piacenza_Ferrovia-01.jpg" alt="">
+          Lo scalo ferroviario ai tempi dei tram a vapore. In secondo piano sulla
+          destra si riconosce l'area delle Ferrovie dello Stato con la Stazione
+          (con il corpo centrale senza ancora l'attuale piano rialzato) e la
+          tettoia delle pensiline:
+          <img src="./images/01-Piacenza_Ferrovia-02.jpg" alt="">
+      </section>
+      <section id="Deposito Berzolla" class="active">
+          <h3>Deposito Berzolla</h3>
+          Foto del deposito in costruzione con l'insegna della SIFT (Società
+          Italiana Ferrovie e Tramvie):
+          <img src="./images/02-Piacenza_Deposito-02.jpg" alt="">
+          Il deposito come si presenta oggi:
+          <img src="./images/02-Piacenza_Deposito-04.jpg" alt="">
+          <img src="./images/02-Piacenza_Deposito-08.jpg" alt="">
+          In cima ai portoni è visibile la sede per il passaggio del cavo elettrico
+          che alimentava le locomotive:
+          <img src="./images/02-Piacenza_Deposito-11.jpg" alt="">
+      </section>
+      <section id="Sottopasso Lupa 1" class="active">
+          <h3>Sottopassaggio della Lupa, lato stazione</h3>
+          Foto d'epoca del sottopassaggio dopo aver lascato la stazione. In alto a
+          sinistra si riconosce uno scorcio dell'edificio dei Magazzini Generali,
+          che si affaccia su Via Cristoforo Colombo:
+          <img src="./images/03-Piacenza_Lupa-12.jpg" alt="">
+          Stessa vista come appare oggi, lungo la pista ciclabile che collega il
+          parcheggio del centro commerciale "Borgo Faxal" con la rotonda tra Viale
+          Patrioti e Via IV Novembre. Sulla sinistra si eleva il terrapieno di un
+          binario che si immetteva su Via Cristoforo Colombo:
+          <img src="./images/03-Piacenza_Lupa-13.jpg" alt="">
+          Cancello su Via dei Pisoni: da qui usciva un binario che proseguiva per
+          Via Cristoforo Colombo:
+          <img src="./images/03-Piacenza_Lupa-14.jpg" alt="">
+      </section>
+      <section id="Sottopasso Lupa 2" class="active">
+          <h3>Sottopassaggio della Lupa, lato Magazzini Generali</h3>
+          Il sottopassaggio visto dall'altra parte, in direzione della stazione.
+          Sulla destra si nota l'imbocco di un altro tunnel che si collegava
+          con la rete delle Ferrovie dello Stato:
+          <img src="./images/03-Piacenza_Lupa-10.jpg" alt="">
+          Vista laterale dell'edificio principale dei Magazzini Generali:
+          <img src="./images/03-Piacenza_Lupa-11.jpg" alt="">
+      </section>
+      <section id="Fermata Lupa" class="active">
+          <h3>Fermata Piacenza Lupa</h3>
+          In Viale Patrioti c'era l'ingresso di una seconda fermata in città, con
+          biglietteria e accesso ai binari attraverso una pensilina. L'antico
+          ingresso si trovava al numero 5 di Viale Patrioti ed è stato sostituito
+          da un edificio residenziale:
+          <img src="./images/04-Piacenza_Lupa-09.jpg" alt="#1#">
+          La pensilina invece si è conservata ed è ancora visibile lungo l'attuale
+          pista ciclabile:
+          <img src="./images/04-Piacenza_Lupa-07.jpg" alt="#2#">
+          Vista della pensilina dal lato opposto, dal retro degli edifici che
+          si affacciano su Via Alessandro Bolzoni:
+          <img src="./images/04-Piacenza_Lupa-08.jpg" alt="#3#">
+      </section>
+      <section id="Sottopasso Farnesiana" class="active">
+          <h3>Sottopassaggio della Farnesiana</h3>
+          Foto d'epoca del sottopassaggio della Farnesiana. A sinistra si
+          distinguono la rampa e l'imbocco di un tunnel che permettevano di
+          raggiungere i Magazzini Generali:
+          <img src="./images/05-Piacenza_Farnesiana-01.jpg" alt="#1#">
+          Vista sttuale del sottopassaggio:
+          <img src="./images/05-Piacenza_Farnesiana-09.jpg" alt="#2#">
+          Vista attuale dell'altro lato:
+          <img src="./images/05-Piacenza_Farnesiana-05.jpg" alt="#3#">
+      </section>
+      <section id="Stazione Smistamento" class="active">
+          <h3>Stazione di Smistamento Piacenza-Cornigliana</h3>
+          <p>All'esterno della zona urbana (dopo l'attuale Via Conciliazione),
+          sorgeva la Stazione di Smistamento (lungo l'attuale Corso Europa).
+      </section>
+      <section id="Installazioni Militari" class="active">
+          <h3>Installazioni Militari</h3>
+          <p>Prima e dopo la Stazione di Smistamento si staccavano alcune
+          diramazioni dirette a varie installazioni militari:
+          <li>lungo Via IV Novembre, seguendo il perimetro delle mura Farnesiane,
+          fino a raggiungere l'Arsenale Militare di Viale Malta ed il Forte di
+          Sant'Antonio
+          <li>verso il Forte San Giuseppe (dove oggi sorge l'azienda agricola La
+          Magnana)
+          <li>verso il Forte della Galleana (dove oggi sorge l'omonimo parco)
+      </section>
+  </div>
+
+  <script type="text/javascript">
+
+  	mapboxgl.accessToken = 'pk.eyJ1Ijoicmljcm9jIiwiYSI6ImNpanZyajMxYTBhdmZ0dG01bmVsbG8ybzcifQ.RdmNKeWGLY_fqRmUrM9m4w';
+      var map = new mapboxgl.Map({
+          container: 'map',
+          style: 'mapbox://styles/ricroc/ckgtl6bx429bc19nnttmdrppi',
+          center: [9.66862, 44.91384],
+          zoom: 10,
+          bearing: 0,
+          pitch: 0
+      });
+
+      map.on('load', function () {
+          map.addSource('google-source', {
+              'type': 'raster',
+              'tiles': ['https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}'],
+              'tileSize': 256
+          });
+          map.addLayer(
+              {
+                  'id': 'google-satellite',
+                  'type': 'raster',
+                  'source': 'google-source',
+                  'paint': {"raster-resampling": "linear"}
+              },
+              'Mappa 1921'
+          );
+          map.setLayoutProperty('google-satellite', 'visibility', 'none');
+      });
+
+      var button1 = document.getElementById( 'HtmlButton1' );
+      button1.className = 'active';
+      button1.onclick = function () {
+        var visibility = map.getLayoutProperty('Etichette', 'visibility');
+        if (visibility === 'none') {
+            map.setLayoutProperty('Etichette', 'visibility', 'visible');
+            button1.className = 'active';
+        } else {
+            map.setLayoutProperty('Etichette', 'visibility', 'none');
+            button1.className = '';
+        }
+      };
+
+      var button2 = document.getElementById( 'HtmlButton2' );
+      button2.className = 'active';
+      button2.onclick = function () {
+        var visibility = map.getLayoutProperty('Binari', 'visibility');
+        if (visibility === 'none') {
+            map.setLayoutProperty('Binari', 'visibility', 'visible');
+            button2.className = 'active';
+        } else {
+            map.setLayoutProperty('Binari', 'visibility', 'none');
+            button2.className = '';
+        }
+      };
+
+      var button3 = document.getElementById( 'HtmlButton3' );
+      button3.className = 'active';
+      button3.onclick = function () {
+        var visibility = map.getLayoutProperty('Ferrovia Piacenza-Bettola', 'visibility');
+        if (visibility === 'none') {
+            map.setLayoutProperty('Ferrovia Piacenza-Bettola', 'visibility', 'visible');
+            button3.className = 'active';
+        } else {
+            map.setLayoutProperty('Ferrovia Piacenza-Bettola', 'visibility', 'none');
+            button3.className = '';
+        }
+      };
+
+      var button4 = document.getElementById( 'HtmlButton4' );
+      button4.className = 'active';
+      button4.onclick = function () {
+        if (button4.className === 'active') {
+            map.setLayoutProperty('Stazione di Piacenza', 'visibility', 'none');
+            map.setLayoutProperty('Fermata Barriera Roma', 'visibility', 'none');
+            map.setLayoutProperty('Stazione Smistamento', 'visibility', 'none');
+            map.setLayoutProperty('Mappa 1921', 'visibility', 'none');
+            button4.className = 'inactive';
+        } else {
+            map.setLayoutProperty('Stazione di Piacenza', 'visibility', 'visible');
+            map.setLayoutProperty('Fermata Barriera Roma', 'visibility', 'visible');
+            map.setLayoutProperty('Stazione Smistamento', 'visibility', 'visible');
+            map.setLayoutProperty('Mappa 1921', 'visibility', 'visible');
+            button4.className = 'active';
+        }
+      };
+
+      var button5 = document.getElementById( 'HtmlButton5' );
+      button5.className = '';
+      button5.onclick = function () {
+        var visibility = map.getLayoutProperty('google-satellite', 'visibility');
+        if (visibility === 'none') {
+            map.setLayoutProperty('google-satellite', 'visibility', 'visible');
+            button5.className = 'active';
+        } else {
+            map.setLayoutProperty('google-satellite', 'visibility', 'none');
+            button5.className = '';
+        }
+      };
+
+      //map.setLayoutProperty('country-label', 'visibility', 'none');
+
+      var chapters = {
+          'Ferrovia Piacenza-Bettola': {
+              center: [9.66862, 44.91384],
+              zoom: 10,
+              bearing: 0,
+              pitch: 0
+          },
+          'Stazione di Piacenza': {
+              center: [9.70618, 45.05098],
+              zoom: 17,
+              pitch: 60,
+              bearing: 152,
+          },
+          'Deposito Berzolla': {
+              center: [9.70750, 45.04892],
+              zoom: 17,
+              pitch: 60,
+              bearing: 156,
+          },
+          'Sottopasso Lupa 1': {
+              center: [9.70663, 45.04723],
+              zoom: 18.5,
+              pitch: 60,
+              bearing: -164,
+          },
+          'Sottopasso Lupa 2': {
+              center: [9.70651, 45.04695],
+              zoom: 17,
+              pitch: 60,
+              bearing: 34.5,
+          },
+          'Fermata Lupa': {
+              center: [9.70572, 45.04620],
+              zoom: 18.5,
+              pitch: 42,
+              bearing: 132.8,
+          },
+          'Sottopasso Farnesiana': {
+              center: [9.70517, 45.04542],
+              zoom: 18.3,
+              pitch: 60,
+              bearing: -139.2,
+          },
+          'Stazione Smistamento': {
+              center: [9.70036, 45.04057],
+              zoom: 15.7,
+              pitch: 60,
+              bearing: -169.6,
+          },
+          'Installazioni Militari': {
+              center: [9.68305, 45.04340],
+              zoom: 13.2,
+              pitch: 0,
+              bearing: -155.6,
+          },
+      };
+
+      // On every scroll event, check which element is on screen
+      window.onscroll = function () {
+          var chapterNames = Object.keys(chapters);
+          for (var i = 0; i < chapterNames.length; i++) {
+              var chapterName = chapterNames[i];
+              if (isElementOnScreen(chapterName)) {
+                  setActiveChapter(chapterName);
+                  break;
+              }
+          }
+      };
+
+      var activeChapterName = 'Ferrovia Piacenza-Bettola';
+
+      function setActiveChapter(chapterName) {
+          if (chapterName === activeChapterName) return;
+          map.flyTo(chapters[chapterName]);
+          document.getElementById(chapterName).setAttribute('class', 'active');
+          document.getElementById(activeChapterName).setAttribute('class', '');
+          activeChapterName = chapterName;
+      }
+
+      function isElementOnScreen(id) {
+          var element = document.getElementById(id);
+          var bounds = element.getBoundingClientRect();
+          return bounds.top < window.innerHeight && bounds.bottom > 0;
+      }
+
+  </script>
+
+</body>
+</html>
