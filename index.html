@@ -282,12 +282,12 @@
       var button3 = document.getElementById( 'HtmlButton3' );
       button3.className = 'active';
       button3.onclick = function () {
-        var visibility = map.getLayoutProperty('Ferrovia Piacenza-Bettola', 'visibility');
+        var visibility = map.getLayoutProperty('Linea Piacenza-Bettola', 'visibility');
         if (visibility === 'none') {
-            map.setLayoutProperty('Ferrovia Piacenza-Bettola', 'visibility', 'visible');
+            map.setLayoutProperty('Linea Piacenza-Bettola', 'visibility', 'visible');
             button3.className = 'active';
         } else {
-            map.setLayoutProperty('Ferrovia Piacenza-Bettola', 'visibility', 'none');
+            map.setLayoutProperty('Linea Piacenza-Bettola', 'visibility', 'none');
             button3.className = '';
         }
       };
