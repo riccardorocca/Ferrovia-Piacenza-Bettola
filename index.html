@@ -101,10 +101,11 @@
   <div id="map"></div>
 
   <div class="menu">
-    <button id="HtmlButton1">Toggle Piacenza</button>
-    <button id="HtmlButton2">Toggle Ferrovia</button>
-    <button id="HtmlButton3">Toggle Stazioni</button>
-    <button id="HtmlButton4">Toggle Road/Satellite</button>
+    <button id="HtmlButton1">Etichette</button>
+    <button id="HtmlButton2">Binari</button>
+    <button id="HtmlButton3">Linea Piacenza-Bettola</button>
+    <button id="HtmlButton4">Mappe</button>
+    <button id="HtmlButton5">Vista Satellitare</button>
   </div>
 
   <div id="features">
@@ -207,8 +208,12 @@
       <section id="Stazione Smistamento" class="active">
           <h3>Stazione di Smistamento Piacenza-Cornigliana</h3>
           <p>All'esterno della zona urbana (dopo l'attuale Via Conciliazione),
-          sorgeva la Stazione di Smistamento. Prima e dopo questa stazione si
-          staccavano alcune diramazioni dirette a varie installazioni militari:
+          sorgeva la Stazione di Smistamento (lungo l'attuale Corso Europa).
+      </section>
+      <section id="Installazioni Militari" class="active">
+          <h3>Installazioni Militari</h3>
+          <p>Prima e dopo la Stazione di Smistamento si staccavano alcune
+          diramazioni dirette a varie installazioni militari:
           <li>lungo Via IV Novembre, seguendo il perimetro delle mura Farnesiane,
           fino a raggiungere l'Arsenale Militare di Viale Malta ed il Forte di
           Sant'Antonio
@@ -243,7 +248,7 @@
                   'source': 'google-source',
                   'paint': {"raster-resampling": "linear"}
               },
-              'ferrovia-piacenza-bettola'
+              'Mappa 1921'
           );
           map.setLayoutProperty('google-satellite', 'visibility', 'none');
       });
@@ -251,12 +256,12 @@
       var button1 = document.getElementById( 'HtmlButton1' );
       button1.className = 'active';
       button1.onclick = function () {
-        var visibility = map.getLayoutProperty('stazione-di-piacenza', 'visibility');
+        var visibility = map.getLayoutProperty('Etichette', 'visibility');
         if (visibility === 'none') {
-            map.setLayoutProperty('stazione-di-piacenza', 'visibility', 'visible');
+            map.setLayoutProperty('Etichette', 'visibility', 'visible');
             button1.className = 'active';
         } else {
-            map.setLayoutProperty('stazione-di-piacenza', 'visibility', 'none');
+            map.setLayoutProperty('Etichette', 'visibility', 'none');
             button1.className = '';
         }
       };
@@ -264,12 +269,12 @@
       var button2 = document.getElementById( 'HtmlButton2' );
       button2.className = 'active';
       button2.onclick = function () {
-        var visibility = map.getLayoutProperty('ferrovia-piacenza-bettola', 'visibility');
+        var visibility = map.getLayoutProperty('Binari', 'visibility');
         if (visibility === 'none') {
-            map.setLayoutProperty('ferrovia-piacenza-bettola', 'visibility', 'visible');
+            map.setLayoutProperty('Binari', 'visibility', 'visible');
             button2.className = 'active';
         } else {
-            map.setLayoutProperty('ferrovia-piacenza-bettola', 'visibility', 'none');
+            map.setLayoutProperty('Binari', 'visibility', 'none');
             button2.className = '';
         }
       };
@@ -277,26 +282,44 @@
       var button3 = document.getElementById( 'HtmlButton3' );
       button3.className = 'active';
       button3.onclick = function () {
-        var visibility = map.getLayoutProperty('ferrovia-piacenza-bettola (1)', 'visibility');
+        var visibility = map.getLayoutProperty('Ferrovia Piacenza-Bettola', 'visibility');
         if (visibility === 'none') {
-            map.setLayoutProperty('ferrovia-piacenza-bettola (1)', 'visibility', 'visible');
+            map.setLayoutProperty('Ferrovia Piacenza-Bettola', 'visibility', 'visible');
             button3.className = 'active';
         } else {
-            map.setLayoutProperty('ferrovia-piacenza-bettola (1)', 'visibility', 'none');
+            map.setLayoutProperty('Ferrovia Piacenza-Bettola', 'visibility', 'none');
             button3.className = '';
         }
       };
 
       var button4 = document.getElementById( 'HtmlButton4' );
-      button4.className = '';
+      button4.className = 'active';
       button4.onclick = function () {
+        if (button4.className === 'active') {
+            map.setLayoutProperty('Stazione di Piacenza', 'visibility', 'none');
+            map.setLayoutProperty('Fermata Barriera Roma', 'visibility', 'none');
+            map.setLayoutProperty('Stazione Smistamento', 'visibility', 'none');
+            map.setLayoutProperty('Mappa 1921', 'visibility', 'none');
+            button4.className = 'inactive';
+        } else {
+            map.setLayoutProperty('Stazione di Piacenza', 'visibility', 'visible');
+            map.setLayoutProperty('Fermata Barriera Roma', 'visibility', 'visible');
+            map.setLayoutProperty('Stazione Smistamento', 'visibility', 'visible');
+            map.setLayoutProperty('Mappa 1921', 'visibility', 'visible');
+            button4.className = 'active';
+        }
+      };
+
+      var button5 = document.getElementById( 'HtmlButton5' );
+      button5.className = '';
+      button5.onclick = function () {
         var visibility = map.getLayoutProperty('google-satellite', 'visibility');
         if (visibility === 'none') {
             map.setLayoutProperty('google-satellite', 'visibility', 'visible');
-            button4.className = 'active';
+            button5.className = 'active';
         } else {
             map.setLayoutProperty('google-satellite', 'visibility', 'none');
-            button4.className = '';
+            button5.className = '';
         }
       };
 
@@ -346,10 +369,16 @@
               bearing: -139.2,
           },
           'Stazione Smistamento': {
-              center: [9.69577, 45.03587],
-              zoom: 14.2,
+              center: [9.70036, 45.04057],
+              zoom: 15.7,
+              pitch: 60,
+              bearing: -169.6,
+          },
+          'Installazioni Militari': {
+              center: [9.68305, 45.04340],
+              zoom: 13.2,
               pitch: 0,
-              bearing: -164,
+              bearing: -155.6,
           },
       };
 
