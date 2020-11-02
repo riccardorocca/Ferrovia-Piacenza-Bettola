@@ -75,12 +75,21 @@
         opacity: 1;
     }
 
+    section p {
+      margin-bottom: 0
+    }
+
+    section li {
+      text-indent: -1em;
+      margin-left: 1em;
+    }
+
     section.active {
         opacity: 1;
     }
 
     section:first-child {
-      margin-top: 0px;
+
     }
 
     section:last-child {
@@ -102,10 +111,9 @@
 
   <div class="menu">
     <button id="HtmlButton1">Etichette</button>
-    <button id="HtmlButton2">Binari</button>
-    <button id="HtmlButton3">Piacenza-Bettola</button>
-    <button id="HtmlButton4">Mappe</button>
-    <button id="HtmlButton5">Vista Satellitare</button>
+    <button id="HtmlButton2">Grafica</button>
+    <button id="HtmlButton3">Mappe</button>
+    <button id="HtmlButton4">Vista Satellitare</button>
   </div>
 
   <div id="features">
@@ -123,12 +131,12 @@
           <p>È possibile cambiare la vista della mappa con il controllo del mouse
           (su PC) o con le dita (su tablet):
           <li>per spostarsi: muovere il mouse tenendo premuto il tasto sinistro
-          / muovere un dito sullo schermo
+          / muovere un dito sullo schermo</li>
           <li>per fare zoom: girare il ruotino del mouse / fare il gesto di
-          "pizzicare" lo schermo
+          "pizzicare" lo schermo</li>
           <li>per ruotare e inclinare la vista: muovere il mouse tenendo premuti
           il tasto CTRL e il tasto sinistro del mouse / muovere due dita sullo
-          schermo
+          schermo</li>
           <p>I bottoni azzurri in alto a sinistra permettono di accendere/spegnere
           i vari elementi della mappa.
           <p>I colori delle linee disegnate sulla mappa si riferiscono a questa
@@ -174,7 +182,7 @@
       </section>
       <section id="Sottopasso Lupa 1" class="active">
           <h3>Sottopassaggio della Lupa, lato stazione</h3>
-          <p>Foto d'epoca del sottopassaggio dopo aver lascato la stazione. In alto a
+          <p>Foto d'epoca del sottopassaggio dopo aver lasciato la stazione. In alto a
           sinistra si riconosce uno scorcio dell'edificio dei Magazzini Generali,
           che si affaccia su Via Cristoforo Colombo:
           <a href="./images/03-Piacenza_Lupa-12.jpg"><img src="./images/03-Piacenza_Lupa-12.jpg" alt="#"></a>
@@ -241,6 +249,33 @@
           Magnana)
           <li>verso il Forte della Galleana (dove oggi sorge l'omonimo parco)
       </section>
+      <section id="Passo canale" class="active">
+          <h3>Passo di canale</h3>
+          <p>Le tracce della ferrovia a volte sono minime e seminascoste.
+          Ad esempio, appena fuori Piacenza, si possono riconoscere le opere in
+          cemento per il passaggio sopra un canale:
+          <a href="./images/06-Passo_Canale-01.jpg" target="_blank"><img src="./images/06-Passo_Canale-01.jpg" alt="#"></a>
+          <a href="./images/06-Passo_Canale-02.jpg" target="_blank"><img src="./images/06-Passo_Canale-02.jpg" alt="#"></a>
+      </section>
+      <section id="Quattro Camini" class="active">
+          <h3>Quattro Camini</h3>
+          <p>In modo simile, presso la località "Quattro Camini", si è conservata
+          traccia dell'antica massicciata, oggi convertita in un vialetto sterrato:
+          <a href="./images/07-Quattro_Camini-01.jpg" target="_blank"><img src="./images/07-Quattro_Camini-01.jpg" alt="#"></a>
+      </section>
+      <section id="San Bonico" class="active">
+          <h3>San Bonico</h3>
+          <p>La stazione di San Bonico, in foto d'epoca e attuali, è ben conservata
+          e trasformata in abitazione. Si riconoscono alcuni dettagli architettonici
+          comuni a tutte le stazioni della linea:
+          <li>i tetti spioventi che terminano con una estensione orizzontale,
+          a mò di pensilina</li>
+          <li>la piccola costruzione, staccata dal corpo principale, che funzionava
+          da bagno pubblico:</li>
+          <a href="./images/08-San_Bonico-02.jpg" target="_blank"><img src="./images/08-San_Bonico-02.jpg" alt="#"></a>
+          <a href="./images/08-San_Bonico-03.jpg" target="_blank"><img src="./images/08-San_Bonico-03.jpg" alt="#"></a>
+          <a href="./images/08-San_Bonico-04.jpg" target="_blank"><img src="./images/08-San_Bonico-04.jpg" alt="#"></a>
+      </section>
       <section id="Fonti" class="active">
           <a id="Fonti"><h3>Fonti dei documenti:</h3></a>
           <li>"Ferrovia Piacenza Barriera Roma - Bettola" nel sito "Ferrovie Abbandonate"
@@ -251,7 +286,7 @@
             <a href="https://www.ilpiacenza.it/attualita/littorina-rimpianto-valnurese-proviamo-almeno-a-riportare-a-casa-giuditta.html" target="_blank" style="color:#00FFFF">(link)</a>
           <li>Archivio personale di Ferruccio Pizzamiglio, Vigolzone
           <li>Archivio di Stato di Palazzo Farnese, Piacenza
-          <li>"Quando tra Piacenza e Bettola correvano le littorine" memoria della Banca di Piacenza.
+          <li>"Quando tra Piacenza e Bettola correvano le littorine" bilancio della Banca di Piacenza.
           <li>Mappa di Piacenza del 1921 dell'Istituto Geografico Militare
             <a href="https://www.igmi.org/it/geoprodotti/raster/1/JPG300_DPI_edizione_precedente/foglio-1515568552.37" target="_blank" style="color:#00FFFF">(link)</a>
       </section>
@@ -305,12 +340,12 @@
       var button2 = document.getElementById( 'HtmlButton2' );
       button2.className = 'active';
       button2.onclick = function () {
-        var visibility = map.getLayoutProperty('Binari', 'visibility');
+        var visibility = map.getLayoutProperty('Grafica', 'visibility');
         if (visibility === 'none') {
-            map.setLayoutProperty('Binari', 'visibility', 'visible');
+            map.setLayoutProperty('Grafica', 'visibility', 'visible');
             button2.className = 'active';
         } else {
-            map.setLayoutProperty('Binari', 'visibility', 'none');
+            map.setLayoutProperty('Grafica', 'visibility', 'none');
             button2.className = '';
         }
       };
@@ -318,44 +353,31 @@
       var button3 = document.getElementById( 'HtmlButton3' );
       button3.className = 'active';
       button3.onclick = function () {
-        var visibility = map.getLayoutProperty('Linea Piacenza-Bettola', 'visibility');
-        if (visibility === 'none') {
-            map.setLayoutProperty('Linea Piacenza-Bettola', 'visibility', 'visible');
-            button3.className = 'active';
-        } else {
-            map.setLayoutProperty('Linea Piacenza-Bettola', 'visibility', 'none');
-            button3.className = '';
-        }
-      };
-
-      var button4 = document.getElementById( 'HtmlButton4' );
-      button4.className = 'active';
-      button4.onclick = function () {
-        if (button4.className === 'active') {
+        if (button3.className === 'active') {
             map.setLayoutProperty('Stazione di Piacenza', 'visibility', 'none');
             map.setLayoutProperty('Fermata Barriera Roma', 'visibility', 'none');
             map.setLayoutProperty('Stazione Smistamento', 'visibility', 'none');
             map.setLayoutProperty('Mappa 1921', 'visibility', 'none');
-            button4.className = 'inactive';
+            button3.className = 'inactive';
         } else {
             map.setLayoutProperty('Stazione di Piacenza', 'visibility', 'visible');
             map.setLayoutProperty('Fermata Barriera Roma', 'visibility', 'visible');
             map.setLayoutProperty('Stazione Smistamento', 'visibility', 'visible');
             map.setLayoutProperty('Mappa 1921', 'visibility', 'visible');
-            button4.className = 'active';
+            button3.className = 'active';
         }
       };
 
-      var button5 = document.getElementById( 'HtmlButton5' );
-      button5.className = '';
-      button5.onclick = function () {
+      var button4 = document.getElementById( 'HtmlButton4' );
+      button4.className = '';
+      button4.onclick = function () {
         var visibility = map.getLayoutProperty('google-satellite', 'visibility');
         if (visibility === 'none') {
             map.setLayoutProperty('google-satellite', 'visibility', 'visible');
-            button5.className = 'active';
+            button4.className = 'active';
         } else {
             map.setLayoutProperty('google-satellite', 'visibility', 'none');
-            button5.className = '';
+            button4.className = '';
         }
       };
 
@@ -415,6 +437,24 @@
               zoom: 13.2,
               pitch: 0,
               bearing: -155.6,
+          },
+          'Passo canale': {
+              center: [9.68749, 45.01774],
+              zoom: 17.1,
+              pitch: 60,
+              bearing: -177.6,
+          },
+          'Quattro Camini': {
+              center: [9.68722, 45.01523],
+              zoom: 17.1,
+              pitch: 60,
+              bearing: -177.6,
+          },
+          'San Bonico': {
+              center: [9.68789, 45.01323],
+              zoom: 17.1,
+              pitch: 60,
+              bearing: 156.8,
           },
           'Fonti': {
               center: [9.66862, 44.91384],
