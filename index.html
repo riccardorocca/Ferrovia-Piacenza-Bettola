@@ -256,6 +256,11 @@
           (in verde):
           <a href="./images/05b-Installazioni_Militari-02.jpg" target="_blank"><img src="./images/05b-Installazioni_Militari-02.jpg" alt="#"></a>
       </section>
+      <section id="Cantoniera Torricelle" class="active">
+          <h3>Casa Cantoniera Torricelle</h3>
+          <a href="./images/05c-Casa_Cantoniera_Torricelle-01.jpg" target="_blank"><img src="./images/05c-Casa_Cantoniera_Torricelle-01.jpg" alt="#"></a>
+          <a href="./images/05c-Casa_Cantoniera_Torricelle-02.jpg" target="_blank"><img src="./images/05c-Casa_Cantoniera_Torricelle-02.jpg" alt="#"></a>
+      </section>
       <section id="Tracce" class="active">
           <h3>Tracce di resti della ferrovia</h3>
           <p>Le tracce della ferrovia a volte sono minime e seminascoste.
@@ -473,11 +478,9 @@
         var visibility = map.getLayoutProperty('Etichette', 'visibility');
         if (visibility === 'none') {
             map.setLayoutProperty('Etichette', 'visibility', 'visible');
-            map.setLayoutProperty('Etichette Zoom', 'visibility', 'visible');
             button1.className = 'active';
         } else {
             map.setLayoutProperty('Etichette', 'visibility', 'none');
-            map.setLayoutProperty('Etichette Zoom', 'visibility', 'none');
             button1.className = '';
         }
       };
@@ -500,12 +503,18 @@
             map.setLayoutProperty('Stazione di Piacenza', 'visibility', 'none');
             map.setLayoutProperty('Fermata Barriera Roma', 'visibility', 'none');
             map.setLayoutProperty('Stazione Smistamento', 'visibility', 'none');
+            map.setLayoutProperty('Casa Cantoniera Torricelle', 'visibility', 'none');
+            map.setLayoutProperty('Stazione di Podenzano', 'visibility', 'none');
+            map.setLayoutProperty('Stazione di Vigolzone', 'visibility', 'none');
             map.setLayoutProperty('Mappa 1921', 'visibility', 'none');
             button3.className = 'inactive';
         } else {
             map.setLayoutProperty('Stazione di Piacenza', 'visibility', 'visible');
             map.setLayoutProperty('Fermata Barriera Roma', 'visibility', 'visible');
             map.setLayoutProperty('Stazione Smistamento', 'visibility', 'visible');
+            map.setLayoutProperty('Casa Cantoniera Torricelle', 'visibility', 'visible');
+            map.setLayoutProperty('Stazione di Podenzano', 'visibility', 'visible');
+            map.setLayoutProperty('Stazione di Vigolzone', 'visibility', 'visible');
             map.setLayoutProperty('Mappa 1921', 'visibility', 'visible');
             button3.className = 'active';
         }
@@ -588,6 +597,13 @@
               zoom: 13.2,
               pitch: 0,
               bearing: -155.6,
+          },
+          'Cantoniera Torricelle': {
+              maps: "satellite+maps",
+              center: [9.68910, 45.02324],
+              zoom: 17,
+              pitch: 41.5,
+              bearing: -158.4,
           },
           'Tracce': {
               maps: "satellite+maps",
@@ -735,6 +751,9 @@
               map.setLayoutProperty('Stazione di Piacenza', 'visibility', 'none');
               map.setLayoutProperty('Fermata Barriera Roma', 'visibility', 'none');
               map.setLayoutProperty('Stazione Smistamento', 'visibility', 'none');
+              map.setLayoutProperty('Casa Cantoniera Torricelle', 'visibility', 'none');
+              map.setLayoutProperty('Stazione di Podenzano', 'visibility', 'none');
+              map.setLayoutProperty('Stazione di Vigolzone', 'visibility', 'none');
               map.setLayoutProperty('Mappa 1921', 'visibility', 'none');
               map.setLayoutProperty('google-satellite', 'visibility', 'none');
               break;
@@ -748,6 +767,9 @@
               map.setLayoutProperty('Stazione di Piacenza', 'visibility', 'visible');
               map.setLayoutProperty('Fermata Barriera Roma', 'visibility', 'visible');
               map.setLayoutProperty('Stazione Smistamento', 'visibility', 'visible');
+              map.setLayoutProperty('Casa Cantoniera Torricelle', 'visibility', 'visible');
+              map.setLayoutProperty('Stazione di Podenzano', 'visibility', 'visible');
+              map.setLayoutProperty('Stazione di Vigolzone', 'visibility', 'visible');
               map.setLayoutProperty('Mappa 1921', 'visibility', 'none');
               map.setLayoutProperty('google-satellite', 'visibility', 'visible');
               break;
@@ -761,6 +783,9 @@
               map.setLayoutProperty('Stazione di Piacenza', 'visibility', 'none');
               map.setLayoutProperty('Fermata Barriera Roma', 'visibility', 'none');
               map.setLayoutProperty('Stazione Smistamento', 'visibility', 'none');
+              map.setLayoutProperty('Casa Cantoniera Torricelle', 'visibility', 'none');
+              map.setLayoutProperty('Stazione di Podenzano', 'visibility', 'none');
+              map.setLayoutProperty('Stazione di Vigolzone', 'visibility', 'none');
               map.setLayoutProperty('Mappa 1921', 'visibility', 'visible');
               map.setLayoutProperty('google-satellite', 'visibility', 'none');
               break;
