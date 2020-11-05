@@ -112,8 +112,9 @@
   <div class="menu">
     <button id="HtmlButton1">Etichette</button>
     <button id="HtmlButton2">Grafica</button>
-    <button id="HtmlButton3">Mappe</button>
-    <button id="HtmlButton4">Vista Satellitare</button>
+    <button id="HtmlButton3">Mappe SIFT</button>
+    <button id="HtmlButton4">Mappa 1921</button>
+    <button id="HtmlButton5">Vista Satellitare</button>
   </div>
 
   <div id="features">
@@ -258,7 +259,11 @@
       </section>
       <section id="Cantoniera Torricelle" class="active">
           <h3>Casa Cantoniera Torricelle</h3>
+          <p>Appena usciti dalla città si incontrava una prima casa cantoniera a
+          sorvegliare l'attraversamento della strada provinciale per la Val Nure.
           <a href="./images/05c-Casa_Cantoniera_Torricelle-01.jpg" target="_blank"><img src="./images/05c-Casa_Cantoniera_Torricelle-01.jpg" alt="#"></a>
+          <p>La casa esiste ancora oggi, alla fine di Corso Europa, convertita
+          in abitazione privata:
           <a href="./images/05c-Casa_Cantoniera_Torricelle-02.jpg" target="_blank"><img src="./images/05c-Casa_Cantoniera_Torricelle-02.jpg" alt="#"></a>
       </section>
       <section id="Tracce" class="active">
@@ -300,7 +305,7 @@
           <a href="./images/10-Podenzano-04.jpg" target="_blank"><img src="./images/10-Podenzano-04.jpg" alt="#"></a>
       </section>
       <section id="Grazzano" class="active">
-          <h3>Stazione di Grazzano Visconti</h3>
+          <h3>Stazione di Grazzano</h3>
           <a href="./images/11-Grazzano_Visconti-03.jpg" target="_blank"><img src="./images/11-Grazzano_Visconti-03.jpg" alt="#"></a>
           <a href="./images/11-Grazzano_Visconti-04.jpg" target="_blank"><img src="./images/11-Grazzano_Visconti-04.jpg" alt="#"></a>
           <a href="./images/11-Grazzano_Visconti-05.jpg" target="_blank"><img src="./images/11-Grazzano_Visconti-05.jpg" alt="#"></a>
@@ -505,8 +510,10 @@
             map.setLayoutProperty('Stazione Smistamento', 'visibility', 'none');
             map.setLayoutProperty('Casa Cantoniera Torricelle', 'visibility', 'none');
             map.setLayoutProperty('Stazione di Podenzano', 'visibility', 'none');
+            map.setLayoutProperty('Stazione di Grazzano', 'visibility', 'none');
             map.setLayoutProperty('Stazione di Vigolzone', 'visibility', 'none');
-            map.setLayoutProperty('Mappa 1921', 'visibility', 'none');
+            map.setLayoutProperty('Fermata Cave Albarola', 'visibility', 'none');
+            map.setLayoutProperty('Stazione di Ponte dellOlio', 'visibility', 'none');
             button3.className = 'inactive';
         } else {
             map.setLayoutProperty('Stazione di Piacenza', 'visibility', 'visible');
@@ -514,21 +521,34 @@
             map.setLayoutProperty('Stazione Smistamento', 'visibility', 'visible');
             map.setLayoutProperty('Casa Cantoniera Torricelle', 'visibility', 'visible');
             map.setLayoutProperty('Stazione di Podenzano', 'visibility', 'visible');
+            map.setLayoutProperty('Stazione di Grazzano', 'visibility', 'visible');
             map.setLayoutProperty('Stazione di Vigolzone', 'visibility', 'visible');
-            map.setLayoutProperty('Mappa 1921', 'visibility', 'visible');
+            map.setLayoutProperty('Fermata Cave Albarola', 'visibility', 'visible');
+            map.setLayoutProperty('Stazione di Ponte dellOlio', 'visibility', 'visible');
             button3.className = 'active';
         }
       };
 
       var button4 = document.getElementById( 'HtmlButton4' );
       button4.onclick = function () {
+        if (button4.className === 'active') {
+            map.setLayoutProperty('Mappa 1921', 'visibility', 'none');
+            button4.className = 'inactive';
+        } else {
+            map.setLayoutProperty('Mappa 1921', 'visibility', 'visible');
+            button4.className = 'active';
+        }
+      };
+
+      var button5 = document.getElementById( 'HtmlButton5' );
+      button5.onclick = function () {
         var visibility = map.getLayoutProperty('google-satellite', 'visibility');
         if (visibility === 'none') {
             map.setLayoutProperty('google-satellite', 'visibility', 'visible');
-            button4.className = 'active';
+            button5.className = 'active';
         } else {
             map.setLayoutProperty('google-satellite', 'visibility', 'none');
-            button4.className = '';
+            button5.className = '';
         }
       };
 
@@ -746,6 +766,7 @@
               button2.className = 'active';
               button3.className = '';
               button4.className = '';
+              button5.className = '';
               map.setLayoutProperty('Etichette', 'visibility', 'visible');
               map.setLayoutProperty('Grafica', 'visibility', 'visible');
               map.setLayoutProperty('Stazione di Piacenza', 'visibility', 'none');
@@ -753,7 +774,10 @@
               map.setLayoutProperty('Stazione Smistamento', 'visibility', 'none');
               map.setLayoutProperty('Casa Cantoniera Torricelle', 'visibility', 'none');
               map.setLayoutProperty('Stazione di Podenzano', 'visibility', 'none');
+              map.setLayoutProperty('Stazione di Grazzano', 'visibility', 'none');
               map.setLayoutProperty('Stazione di Vigolzone', 'visibility', 'none');
+              map.setLayoutProperty('Fermata Cave Albarola', 'visibility', 'none');
+              map.setLayoutProperty('Stazione di Ponte dellOlio', 'visibility', 'none');
               map.setLayoutProperty('Mappa 1921', 'visibility', 'none');
               map.setLayoutProperty('google-satellite', 'visibility', 'none');
               break;
@@ -761,7 +785,8 @@
               button1.className = 'active';
               button2.className = 'active';
               button3.className = 'active';
-              button4.className = 'active';
+              button4.className = '';
+              button5.className = 'active';
               map.setLayoutProperty('Etichette', 'visibility', 'visible');
               map.setLayoutProperty('Grafica', 'visibility', 'visible');
               map.setLayoutProperty('Stazione di Piacenza', 'visibility', 'visible');
@@ -769,15 +794,19 @@
               map.setLayoutProperty('Stazione Smistamento', 'visibility', 'visible');
               map.setLayoutProperty('Casa Cantoniera Torricelle', 'visibility', 'visible');
               map.setLayoutProperty('Stazione di Podenzano', 'visibility', 'visible');
+              map.setLayoutProperty('Stazione di Grazzano', 'visibility', 'visible');
               map.setLayoutProperty('Stazione di Vigolzone', 'visibility', 'visible');
+              map.setLayoutProperty('Fermata Cave Albarola', 'visibility', 'visible');
+              map.setLayoutProperty('Stazione di Ponte dellOlio', 'visibility', 'visible');
               map.setLayoutProperty('Mappa 1921', 'visibility', 'none');
               map.setLayoutProperty('google-satellite', 'visibility', 'visible');
               break;
             case "map25000":
               button1.className = 'active';
               button2.className = 'active';
-              button3.className = 'active';
-              button4.className = '';
+              button3.className = '';
+              button4.className = 'active';
+              button5.className = '';
               map.setLayoutProperty('Etichette', 'visibility', 'visible');
               map.setLayoutProperty('Grafica', 'visibility', 'visible');
               map.setLayoutProperty('Stazione di Piacenza', 'visibility', 'none');
@@ -785,7 +814,10 @@
               map.setLayoutProperty('Stazione Smistamento', 'visibility', 'none');
               map.setLayoutProperty('Casa Cantoniera Torricelle', 'visibility', 'none');
               map.setLayoutProperty('Stazione di Podenzano', 'visibility', 'none');
+              map.setLayoutProperty('Stazione di Grazzano', 'visibility', 'none');
               map.setLayoutProperty('Stazione di Vigolzone', 'visibility', 'none');
+              map.setLayoutProperty('Fermata Cave Albarola', 'visibility', 'none');
+              map.setLayoutProperty('Stazione di Ponte dellOlio', 'visibility', 'none');
               map.setLayoutProperty('Mappa 1921', 'visibility', 'visible');
               map.setLayoutProperty('google-satellite', 'visibility', 'none');
               break;
