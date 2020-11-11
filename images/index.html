@@ -1,0 +1,705 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <script type="text/javascript" src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css">
+
+  <style id="compiled-css" type="text/css">
+
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+  	#map { position: fixed; top: 0; bottom: 0; width: 60%; }
+
+    .menu {
+        background: #fff;
+        position: fixed;
+        z-index: 1;
+        top: 10px;
+        left: 10px;
+        border-radius: 3px;
+        width: 100px;
+        border: 1px solid rgba(0,0,0,0.4);
+        font-family: 'Open Sans', sans-serif;
+        font-size: 16px;
+    }
+
+    button {
+        color: #404040;
+        display: block;
+        margin: 0;
+        padding: 0;
+        padding: 5px;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(0,0,0,0.25);
+        text-align: center;
+        width: 100%;
+    }
+
+    button:last-child {
+        border: none;
+    }
+
+    button:hover {
+        background-color: #f8f8f8;
+        color: #404040;
+    }
+
+    button.active {
+        background-color: #3887be;
+        color: #ffffff;
+    }
+
+    button.active:hover {
+        background: #3074a4;
+    }
+
+    #features {
+        width: 40%;
+        margin-left: 60%;
+        font-family: sans-serif;
+        font-size: 16px;
+        overflow-y: scroll;
+        color: #ffffff;
+        background-color: #000000;
+    }
+
+    section {
+        padding: 25px 50px;
+        line-height: 25px;
+        margin-top: 100px;
+        border-bottom: 1px solid #ddd;
+        opacity: 1;
+    }
+
+    section p {
+      margin-bottom: 0
+    }
+
+    section li {
+      text-indent: -1em;
+      margin-left: 1em;
+    }
+
+    section.active {
+        opacity: 1;
+    }
+
+    section:first-child {
+      margin-top: 0px;
+    }
+
+    section:last-child {
+        border-bottom: none;
+        margin-bottom: 300px;
+    }
+
+    section img {
+        width: 100%;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <div id="map"></div>
+
+  <div class="menu">
+    <button id="HtmlButton1">Etichette</button>
+    <button id="HtmlButton2">Grafica</button>
+    <button id="HtmlButton3">Mappe SIFT</button>
+    <button id="HtmlButton4">Mappa 1921</button>
+    <button id="HtmlButton5">Vista Satellitare</button>
+  </div>
+
+  <div id="features">
+      <section id="Ferrovia Piacenza-Bettola" class="active">
+          <h3>Ferrovia Piacenza-Bettola</h3>
+          <p> In questo progetto ho ordinato geograficamente il materiale
+          fotografico, sia storico sia attuale, che ho raccolto sulla dismessa
+          linea ferroviaria Piacenza-Bettola, che funzionò tra il 1933 ed il 1967.
+          <p>Per vedere il progetto bisogna far scorrere i capitoli di testo.
+          Ogni volta che si passa a un nuovo capitolo, la vista della mappa si
+          aggiorna, mostrando la posizione descritta nel testo.
+          <p>Per ingrandire una foto, fare click sulla foto stessa aprendola
+          in una nuova finestra. Per continuare con la navigazione, chiudere la
+          finestra con la foto e tornare a quella del progetto.
+          <p>È possibile cambiare la vista della mappa con il controllo del mouse
+          (su PC) o con le dita (su tablet):
+          <li>per spostarsi: muovere il mouse tenendo premuto il tasto sinistro
+          / muovere un dito sullo schermo</li>
+          <li>per fare zoom: girare il ruotino del mouse / fare il gesto di
+          "pizzicare" lo schermo</li>
+          <li>per ruotare e inclinare la vista: muovere il mouse tenendo premuti
+          il tasto CTRL e il tasto sinistro del mouse / muovere due dita sullo
+          schermo</li>
+          <p>I bottoni azzurri in alto a sinistra permettono di accendere/spegnere
+          i vari elementi della mappa.
+          <p>I colori della grafica disegnata in mappa si riferiscono a questa
+          legenda:
+          <img src="./images/00-Legenda.png" alt="#" width="50%" height="50%"></a>
+          <p>Le fonti dei documenti sono elencate alla fine del testo
+            <a href="#Fonti" style="color:#00FFFF">(link)</a>
+          <p>Riccardo Rocca <a href="mailto:riccardo.rocca@hotmail.com"
+          style="color:#00FFFF">(email)</a>, Novembre 2020
+      </section>
+      <section id="Stazione di Piacenza">
+          <h3>Stazione di Piacenza</h3>
+          <p>L'edificio della Stazione di Piacenza venne costruito nel 1880 e
+          inizialmente serviva come stazione della rete di tram a vapore che si
+          diramavano in provincia. Questa foto degli anni '20 mostra la facciata
+          della stazione in questo periodo, come indica l'insegna "STAZIONE TRAMWAY":
+          <a href="./images/01-Piacenza_Ferrovia-01.jpg" target="_blank"><img src="./images/01-Piacenza_Ferrovia-01.jpg" alt="#"></a>
+          <p>Lo scalo ferroviario ai tempi dei tram a vapore. In secondo piano sulla
+          destra si riconosce l'area delle Ferrovie dello Stato con la stazione
+          (ancora tutta di un solo piano) e la tettoia delle pensiline:
+          <a href="./images/01-Piacenza_Ferrovia-02.jpg" target="_blank"><img src="./images/01-Piacenza_Ferrovia-02.jpg" alt="#"></a>
+          <p>Questa foto invece mostra la stazione al tempo della ferrovia elettrica.
+          In primo piano si distingue il Bar Sorgente, sorto nell'edificio che
+          era stato l'antica postazione delle guardie del dazio:
+          <a href="./images/01-Piacenza_Ferrovia-04.jpg" target="_blank"><img src="./images/01-Piacenza_Ferrovia-04.jpg" alt="#"></a>
+          <p>Vista dal lato pensiline con una littorina passeggeri:
+          <a href="./images/01-Piacenza_Ferrovia-05.jpg" target="_blank"><img src="./images/01-Piacenza_Ferrovia-05.jpg" alt="#"></a>
+          <p>Vista dello scalo ferroviario nel 1964, con una serie di carri per
+          il trasporto della marna proveniente dalle cave della Val Nure:
+          <a href="./images/01-Piacenza_Ferrovia-06.jpg" target="_blank"><img src="./images/01-Piacenza_Ferrovia-06.jpg" alt="#"></a>
+          <p>Nel 2000 l'area della Stazione di Piacenza venne completamente
+          rimodellata. Gli antichi edifici vennero abbattuti, i binari rimossi
+          e al loro posto venne costruito il centro commerciale Borgo Faxal:
+          <a href="./images/01-Piacenza_Ferrovia-07.jpg" target="_blank"><img src="./images/01-Piacenza_Ferrovia-07.jpg" alt="#"></a>
+      </section>
+      <section id="Deposito Berzolla" class="active">
+          <h3>Deposito Berzolla</h3>
+          <p>Foto del deposito locomotori in costruzione con l'insegna della
+          SIFT (Società Italiana Ferrovie e Tramvie):
+          <a href="./images/02-Piacenza_Deposito-02.jpg" target="_blank"><img src="./images/02-Piacenza_Deposito-02.jpg" alt="#"></a>
+          <p>Il deposito come si presenta oggi:
+          <a href="./images/02-Piacenza_Deposito-04.jpg" target="_blank"><img src="./images/02-Piacenza_Deposito-04.jpg" alt="#"></a>
+          <a href="./images/02-Piacenza_Deposito-08.jpg" target="_blank"><img src="./images/02-Piacenza_Deposito-08.jpg" alt="#"></a>
+          <p>In cima ai portoni è visibile la sede per il passaggio del cavo elettrico
+          che alimentava le locomotive:
+          <a href="./images/02-Piacenza_Deposito-11.jpg" target="_blank"><img src="./images/02-Piacenza_Deposito-11.jpg" alt="#"></a>
+      </section>
+      <section id="Sottopasso Barriera Roma 1" class="active">
+          <h3>Sottopassaggio di Barriera Roma, lato stazione</h3>
+          <p>Foto d'epoca del sottopassaggio dopo aver lasciato la stazione. In alto a
+          sinistra si riconosce uno scorcio dell'edificio dei Magazzini Generali,
+          che si affaccia su Via Cristoforo Colombo:
+          <a href="./images/03-Piacenza_Lupa-12.jpg" target="_blank"><img src="./images/03-Piacenza_Lupa-12.jpg" alt="#"></a>
+          <p>Stessa vista come appare oggi, lungo la pista ciclabile che collega il
+          parcheggio del centro commerciale "Borgo Faxal" con la rotonda tra Viale
+          Patrioti e Via IV Novembre. Sulla sinistra si eleva il terrapieno di un
+          binario che si immetteva su Via Cristoforo Colombo:
+          <a href="./images/03-Piacenza_Lupa-13.jpg" target="_blank"><img src="./images/03-Piacenza_Lupa-13.jpg" alt="#"></a>
+          <p>Cancello su Via dei Pisoni: da qui usciva un binario che proseguiva per
+          Via Cristoforo Colombo:
+          <a href="./images/03-Piacenza_Lupa-14.jpg" target="_blank"><img src="./images/03-Piacenza_Lupa-14.jpg" alt="#"></a>
+      </section>
+      <section id="Sottopasso Barriera Roma 2" class="active">
+          <h3>Sottopassaggio di Barriera Roma, lato Magazzini Generali</h3>
+          <p>Il sottopassaggio visto dall'altra parte. Sulla destra si nota
+          l'imbocco di un altro tunnel che si collegava con la rete delle
+          Ferrovie dello Stato:
+          <a href="./images/03-Piacenza_Lupa-10.jpg" target="_blank"><img src="./images/03-Piacenza_Lupa-10.jpg" alt="#"></a>
+          <p>Sul lato orientale si trovavano gli edifici dei Magazzini Generali,
+          anch'essi collegati alla ferrovia per permettere l'arrivo delle merci.
+          La foto mostra la facciata laterale di quello che era l'edificio
+          principale che si affacciava su via Cristoforo Colombo e che esiste
+          ancor'oggi:
+          <a href="./images/03-Piacenza_Lupa-11.jpg" target="_blank"><img src="./images/03-Piacenza_Lupa-11.jpg" alt="#"></a>
+          <p>E questo sono io nel 1963, fotografato dentro quello stesso edificio.
+          In quel periodo infatti l'edificio aveva smesso la sua funzione
+          originaria ed era stato convertito in un condominio abitativo. E la
+          mia famiglia visse in un appartamento di quel condominio per alcuni anni.
+          <a href="./images/03-Piacenza_Lupa-15.jpg" target="_blank"><img src="./images/03-Piacenza_Lupa-15.jpg" alt="#"></a>
+      </section>
+      <section id="Fermata Barriera Roma" class="active">
+          <h3>Fermata di Barriera Roma</h3>
+          <p>In Viale Patrioti c'era l'ingresso di una seconda fermata in città, con
+          biglietteria e accesso ai binari attraverso una pensilina. L'antico
+          ingresso si trovava al numero 5 di Viale Patrioti ed è stato sostituito
+          da un edificio residenziale:
+          <a href="./images/04-Piacenza_Lupa-09.jpg" target="_blank"><img src="./images/04-Piacenza_Lupa-09.jpg" alt="#"></a>
+          <p>La pensilina invece si è conservata ed è ancora visibile lungo l'attuale
+          pista ciclabile:
+          <a href="./images/04-Piacenza_Lupa-07.jpg" target="_blank"><img src="./images/04-Piacenza_Lupa-07.jpg" alt="#"></a>
+          <p>Vista della pensilina dal lato opposto, dal retro degli edifici che
+          si affacciano su Via Alessandro Bolzoni:
+          <a href="./images/04-Piacenza_Lupa-08.jpg" target="_blank"><img src="./images/04-Piacenza_Lupa-08.jpg" alt="#"></a>
+      </section>
+      <section id="Sottopasso Farnesiana" class="active">
+          <h3>Sottopassaggio della Farnesiana</h3>
+          <p>Foto d'epoca del sottopassaggio della Farnesiana. A sinistra si
+          distinguono la rampa e l'imbocco di un tunnel che permettevano di
+          raggiungere i Magazzini Generali:
+          <a href="./images/05-Piacenza_Farnesiana-01.jpg" target="_blank"><img src="./images/05-Piacenza_Farnesiana-01.jpg" alt="#"></a>
+          <p>Vista attuale del sottopassaggio:
+          <a href="./images/05-Piacenza_Farnesiana-09.jpg" target="_blank"><img src="./images/05-Piacenza_Farnesiana-09.jpg" alt="#"></a>
+          <p>Vista del lato opposto, in una foto dell'epoca. In fondo, sotto
+          l'arcata sinistra, si distingue il ponte della pensilina della fermata
+          di Barriera Roma:
+          <a href="./images/05-Piacenza_Farnesiana-10.jpg" target="_blank"><img src="./images/05-Piacenza_Farnesiana-10.jpg" alt="#"></a>
+          <p>Stessa vista attuale:
+          <a href="./images/05-Piacenza_Farnesiana-05.jpg" target="_blank"><img src="./images/05-Piacenza_Farnesiana-05.jpg" alt="#"></a>
+      </section>
+      <section id="Stazione Smistamento" class="active">
+          <h3>Stazione di Smistamento Piacenza-Cornigliana</h3>
+          <p>All'esterno della zona urbana (dopo l'attuale Via Conciliazione),
+          sorgeva la Stazione di Smistamento (lungo l'attuale Corso Europa).
+          <p>Mappa estratta dai documenti della società SIFT, conservata
+          nell'Archivio di Stato di Piacenza:
+          <a href="./images/05a-Stazione_Smistamento-01.jpg" target="_blank"><img src="./images/05a-Stazione_Smistamento-01.jpg" alt="#"></a>
+      </section>
+      <section id="Installazioni Militari" class="active">
+          <a id="Installazioni_Militari"><h3>Installazioni Militari:</h3></a>
+          <p>Prima e dopo la Stazione di Smistamento si staccavano alcune
+          diramazioni dirette a varie installazioni militari:
+          <li>lungo Via IV Novembre, seguendo il perimetro delle mura Farnesiane,
+          fino a raggiungere l'Arsenale Militare di Viale Malta ed il Forte di
+          Sant'Antonio</li>
+          <li>verso il Forte San Giuseppe (dove oggi sorge l'azienda agricola La
+          Magnana)</li>
+          <li>verso il Forte della Galleana (dove oggi sorge l'omonimo parco)</li>
+          <p>Mappa delle fortificazioni di Piacenza. I forti San Giuseppe,
+          Galleana e Sant'Antonio fanno parte delle fortificazioni del 1800
+          (in verde):
+          <a href="./images/05b-Installazioni_Militari-02.jpg" target="_blank"><img src="./images/05b-Installazioni_Militari-02.jpg" alt="#"></a>
+      </section>
+      <section id="Cantoniera Torricelle" class="active">
+          <h3>Casa Cantoniera Torricelle</h3>
+          <p>Appena usciti dalla città si incontrava una prima casa cantoniera a
+          sorvegliare l'attraversamento della strada provinciale per la Val Nure.
+          <a href="./images/05c-Casa_Cantoniera_Torricelle-01.jpg" target="_blank"><img src="./images/05c-Casa_Cantoniera_Torricelle-01.jpg" alt="#"></a>
+          <p>La casa esiste ancora oggi, alla fine di Corso Europa, convertita
+          in abitazione privata:
+          <a href="./images/05c-Casa_Cantoniera_Torricelle-03.jpg" target="_blank"><img src="./images/05c-Casa_Cantoniera_Torricelle-03.jpg" alt="#"></a>
+          <p>Il modello di casa cantoniera, come appare nei documenti della SIFT.
+          Si può notare un elemento architettonico distintivo e presente in tutti
+          gli edifici lungo la linea: gli spioventi del tetto che terminano con
+          una estensione orizzontale estesa lungo tutto il lato dell'edificio:
+          <a href="./images/05c-Casa_Cantoniera_Torricelle-02.jpg" target="_blank"><img src="./images/05c-Casa_Cantoniera_Torricelle-02.jpg" alt="#"></a>
+      </section>
+      <section id="Tracce" class="active">
+          <h3>Tracce di resti della ferrovia</h3>
+          <p>Le tracce della ferrovia a volte sono minime e seminascoste.
+          Ad esempio, appena fuori Piacenza, si possono riconoscere le opere in
+          cemento per l'attraversamento di un canale:
+          <a href="./images/06-Passo_Canale-01.jpg" target="_blank"><img src="./images/06-Passo_Canale-01.jpg" alt="#"></a>
+          <a href="./images/06-Passo_Canale-02.jpg" target="_blank"><img src="./images/06-Passo_Canale-02.jpg" alt="#"></a>
+          <p>In modo simile, presso la località "Quattro Camini", si è conservata
+          traccia dell'antica massicciata, oggi convertita in un vialetto sterrato:
+          <a href="./images/07-Quattro_Camini-01.jpg" target="_blank"><img src="./images/07-Quattro_Camini-01.jpg" alt="#"></a>
+      </section>
+      <section id="San Bonico" class="active">
+          <h3>Stazione di San Bonico</h3>
+          <p>La stazione di San Bonico, in foto d'epoca e attuali, è ben conservata
+          e trasformata in abitazione.
+          <a href="./images/08-San_Bonico-02.jpg" target="_blank"><img src="./images/08-San_Bonico-02.jpg" alt="#"></a>
+          <a href="./images/08-San_Bonico-04.jpg" target="_blank"><img src="./images/08-San_Bonico-04.jpg" alt="#"></a>
+          <p> In questa foto si riconosce sulla sinistra un altro elemento
+          architettonico presente in quasi tutte le stazioni della linea: la
+          piccola costruzione, staccata dal corpo principale, che fungeva da
+          bagno pubblico:
+          <a href="./images/08-San_Bonico-03.jpg" target="_blank"><img src="./images/08-San_Bonico-03.jpg" alt="#"></a>
+          Progetto dell'edificio della latrina, nei documenti della SIFT:
+          <a href="./images/08-San_Bonico-05.jpg" target="_blank"><img src="./images/08-San_Bonico-05.jpg" alt="#"></a>
+      </section>
+      <section id="Gariga" class="active">
+          <h3>Stazione di Gariga</h3>
+          <p>Poco prima di arrivare alla stazione di Gariga, si incontrava una
+          casa cantoniera:
+          <a href="./images/09-Gariga-02.jpg" target="_blank"><img src="./images/09-Gariga-02.jpg" alt="#"></a>
+          <p>La stazione di Gariga è oggi convertita in abitazione e conserva
+          ancora il tipico viale alberato che conduceva all'ingresso:
+          <a href="./images/09-Gariga-06.jpg" target="_blank"><img src="./images/09-Gariga-06.jpg" alt="#"></a>
+          <a href="./images/09-Gariga-10.jpg" target="_blank"><img src="./images/09-Gariga-10.jpg" alt="#"></a>
+          <a href="./images/09-Gariga-11.jpg" target="_blank"><img src="./images/09-Gariga-11.jpg" alt="#"></a>
+      </section>
+      <section id="Podenzano" class="active">
+          <h3>Stazione di Podenzano</h3>
+          <p>Della stazione di Podenzano si è conservato solo il viale d'accesso
+          alberato, che si chiama appunto "Viale Stazione":
+          <a href="./images/10-Podenzano-01.jpg" target="_blank"><img src="./images/10-Podenzano-01.jpg" alt="#"></a>
+          <p>L'edificio della stazione invece non si è conservato, per cui
+          possiamo mostrare solo le foto d'epoca:
+          <a href="./images/10-Podenzano-02.jpg" target="_blank"><img src="./images/10-Podenzano-02.jpg" alt="#"></a>
+          <a href="./images/10-Podenzano-03.jpg" target="_blank"><img src="./images/10-Podenzano-03.jpg" alt="#"></a>
+          <p>In questa foto l'edificio della stazione appare in secondo piano,
+          dietro al piazzale del parco tubi dell'Agip, al tempo della
+          perforazione dei pozzi a gas e olio di Podenzano negli anni '30:
+          <a href="./images/10-Podenzano-04.jpg" target="_blank"><img src="./images/10-Podenzano-04.jpg" alt="#"></a>
+      </section>
+      <section id="Grazzano" class="active">
+          <h3>Stazione di Grazzano</h3>
+          <p>Lo sviluppo urbanistico di Grazzano Visconti seguì lo sviluppo delle
+          vie ferrate. La prima linea di tram è degli inizi del '900 e seguiva
+          il tracciato della strada provinciale (linee gialle in mappa) che
+          attraversava l'interno attuale del paese. In quell'epoca da Grazzano
+          Visconti partiva anche una deviazione che raggiungeva Rivergaro:
+          <a href="./images/11-Grazzano_Visconti-10.jpg" target="_blank"><img src="./images/11-Grazzano_Visconti-10.jpg" alt="#"></a>
+          <p>Successivamente negli anni '20, con l'espansione del borgo, la linea
+          dei tram venne deviata verso l'esterno (linee verdi in mappa) e venne
+          costruita una nuova stazione che è visibile ancora oggi lungo la
+          strada provinciale:
+          <a href="./images/11-Grazzano_Visconti-08.jpg" target="_blank"><img src="./images/11-Grazzano_Visconti-08.jpg" alt="#"></a>
+          <a href="./images/11-Grazzano_Visconti-07.jpg" target="_blank"><img src="./images/11-Grazzano_Visconti-07.jpg" alt="#"></a>
+          <p>Finalmente venne costruita la ferrovia elettrica (linee azzurre in
+          mappa) con la sua peropria stazione. La linea del tram venne dismessa
+          e lungo il suo percorso venne deviata la strada provinciale.
+          <p>La stazione di Grazzano Visconti, a differenza delle altre stazioni
+          della linea Piacenza-Bettola, venne costruita in stile medioevale, in
+          armonia con lo stile del resto del borgo:
+          <a href="./images/11-Grazzano_Visconti-03.jpg" target="_blank"><img src="./images/11-Grazzano_Visconti-03.jpg" alt="#"></a>
+          <a href="./images/11-Grazzano_Visconti-04.jpg" target="_blank"><img src="./images/11-Grazzano_Visconti-04.jpg" alt="#"></a>
+          <p>L'edificio della stazione è attualmente un'abitazione privata, ma
+          ci sono progetti per convertirla in un Bed&Breakfast:
+          <a href="./images/11-Grazzano_Visconti-05.jpg" target="_blank"><img src="./images/11-Grazzano_Visconti-05.jpg" alt="#"></a>
+          <p>Appena lasciata la stazione di Grazzano Visconti si incontrava una
+          casa cantoniera, anch'essa in stile medioevale:
+          <a href="./images/11-Grazzano_Visconti-09.jpg" target="_blank"><img src="./images/11-Grazzano_Visconti-09.jpg" alt="#"></a>
+      </section>
+      <section id="Vigolzone" class="active">
+          <h3>Stazione di Vigolzone</h3>
+          <a href="./images/12-Vigolzone-08.jpg" target="_blank"><img src="./images/12-Vigolzone-08.jpg" alt="#"></a>
+          <a href="./images/12-Vigolzone-04.jpg" target="_blank"><img src="./images/12-Vigolzone-04.jpg" alt="#"></a>
+          <a href="./images/12-Vigolzone-01.jpg" target="_blank"><img src="./images/12-Vigolzone-01.jpg" alt="#"></a>
+          <a href="./images/12-Vigolzone-02.jpg" target="_blank"><img src="./images/12-Vigolzone-02.jpg" alt="#"></a>
+          <a href="./images/12-Vigolzone-12.jpg" target="_blank"><img src="./images/12-Vigolzone-12.jpg" alt="#"></a>
+          <a href="./images/12-Vigolzone-09.jpg" target="_blank"><img src="./images/12-Vigolzone-09.jpg" alt="#"></a>
+      </section>
+      <section id="Villo" class="active">
+          <h3>Stazione di Villò</h3>
+          <a href="./images/13-Villo-03.jpg" target="_blank"><img src="./images/13-Villo-03.jpg" alt="#"></a>
+          <a href="./images/13-Villo-04.jpg" target="_blank"><img src="./images/13-Villo-04.jpg" alt="#"></a>
+          <a href="./images/13-Villo-02.jpg" target="_blank"><img src="./images/13-Villo-02.jpg" alt="#"></a>
+      </section>
+      <section id="Albarola" class="active">
+          <h3>Stazione di Albarola</h3>
+          <p>La stazione di Albarola era inizialmente una casa cantoniera a cui
+          successivamente venne aggiunta un'ala adibita a sala d'aspetto. Questo
+          è riconoscibile nella foto d'epoca e nel progetto tratto dai documenti
+          della SIFT:
+          <a href="./images/14-Albarola-03.jpg" target="_blank"><img src="./images/14-Albarola-03.jpg" alt="#"></a>
+          <a href="./images/14-Albarola-04.jpg" target="_blank"><img src="./images/14-Albarola-04.jpg" alt="#"></a>
+          <p>Attualmente l'edificio, profondamente ristrutturato, è adibito ad
+          abitazione. Si riconoscono però alcuni elementi dell'edificio
+          originale, come il tettuccio del piano terra che si estende fino a
+          metà facciata e le finestre del primo piano, identiche le due di
+          destra, differente e aggiunta con la ristrutturazione quella di sinistra.
+          <a href="./images/14-Albarola-01.jpg" target="_blank"><img src="./images/14-Albarola-01.jpg" alt="#"></a>
+          <p>Subito dopo Albarola, la ferrovia passava su un cavalcavia per
+          attraversare la strada provinciale. Di quel cavalcavia oggi non rimane
+          traccia, però la sua passata presenza è testimoniata dalla doppia
+          curva che si è conservata nel tracciato della strada provinciale
+          (linee gialle in mappa).
+      </section>
+      <section id="Cave Ponte" class="active">
+          <h3>Fermata Cave Albarola e Ponte di Ponte dell'Olio</h3>
+          <a href="./images/15-Cave_Ponte-01.jpg" target="_blank"><img src="./images/15-Cave_Ponte-01.jpg" alt="#"></a>
+          <a href="./images/15-Cave_Ponte-02.jpg" target="_blank"><img src="./images/15-Cave_Ponte-02.jpg" alt="#"></a>
+          <a href="./images/15-Cave_Ponte-03.jpg" target="_blank"><img src="./images/15-Cave_Ponte-03.jpg" alt="#"></a>
+          <a href="./images/15-Cave_Ponte-04.jpg" target="_blank"><img src="./images/15-Cave_Ponte-04.jpg" alt="#"></a>
+          <a href="./images/15-Cave_Ponte-05.jpg" target="_blank"><img src="./images/15-Cave_Ponte-05.jpg" alt="#"></a>
+          <a href="./images/15-Cave_Ponte-06.jpg" target="_blank"><img src="./images/15-Cave_Ponte-06.jpg" alt="#"></a>
+          <a href="./images/15-Cave_Ponte-07.jpg" target="_blank"><img src="./images/15-Cave_Ponte-07.jpg" alt="#"></a>
+          <a href="./images/15-Cave_Ponte-08.jpg" target="_blank"><img src="./images/15-Cave_Ponte-08.jpg" alt="#"></a>
+          <a href="./images/15-Cave_Ponte-09.jpg" target="_blank"><img src="./images/15-Cave_Ponte-09.jpg" alt="#"></a>
+      </section>
+      <section id="Ponte dellOlio" class="active">
+          <h3>Ponte dell'Olio</h3>
+          <a href="./images/16-Ponte_dellOlio-01.jpg" target="_blank"><img src="./images/16-Ponte_dellOlio-01.jpg" alt="#"></a>
+          <a href="./images/16-Ponte_dellOlio-02.jpg" target="_blank"><img src="./images/16-Ponte_dellOlio-02.jpg" alt="#"></a>
+          <a href="./images/16-Ponte_dellOlio-03.jpg" target="_blank"><img src="./images/16-Ponte_dellOlio-03.jpg" alt="#"></a>
+          <a href="./images/16-Ponte_dellOlio-04.jpg" target="_blank"><img src="./images/16-Ponte_dellOlio-04.jpg" alt="#"></a>
+          <a href="./images/16-Ponte_dellOlio-05.jpg" target="_blank"><img src="./images/16-Ponte_dellOlio-05.jpg" alt="#"></a>
+          <a href="./images/16-Ponte_dellOlio-06.jpg" target="_blank"><img src="./images/16-Ponte_dellOlio-06.jpg" alt="#"></a>
+          <a href="./images/16-Ponte_dellOlio-07.jpg" target="_blank"><img src="./images/16-Ponte_dellOlio-07.jpg" alt="#"></a>
+          <a href="./images/16-Ponte_dellOlio-08.jpg" target="_blank"><img src="./images/16-Ponte_dellOlio-08.jpg" alt="#"></a>
+          <a href="./images/16-Ponte_dellOlio-09.jpg" target="_blank"><img src="./images/16-Ponte_dellOlio-09.jpg" alt="#"></a>
+          <a href="./images/16-Ponte_dellOlio-10.jpg" target="_blank"><img src="./images/16-Ponte_dellOlio-10.jpg" alt="#"></a>
+          <a href="./images/16-Ponte_dellOlio-11.jpg" target="_blank"><img src="./images/16-Ponte_dellOlio-11.jpg" alt="#"></a>
+      </section>
+      <section id="Riva" class="active">
+          <h3>Stazione di Riva e Sottopassaggio</h3>
+          <a href="./images/17-Riva-01.jpg" target="_blank"><img src="./images/17-Riva-01.jpg" alt="#"></a>
+          <a href="./images/17-Riva-02.jpg" target="_blank"><img src="./images/17-Riva-02.jpg" alt="#"></a>
+          <a href="./images/17-Riva-03.jpg" target="_blank"><img src="./images/17-Riva-03.jpg" alt="#"></a>
+          <a href="./images/17-Riva-04.jpg" target="_blank"><img src="./images/17-Riva-04.jpg" alt="#"></a>
+          <a href="./images/17-Riva-05.jpg" target="_blank"><img src="./images/17-Riva-05.jpg" alt="#"></a>
+          <a href="./images/17-Riva-06.jpg" target="_blank"><img src="./images/17-Riva-06.jpg" alt="#"></a>
+          <a href="./images/17-Riva-07.jpg" target="_blank"><img src="./images/17-Riva-07.jpg" alt="#"></a>
+      </section>
+      <section id="Molino Croce" class="active">
+          <h3>Stazione di Molino Croce</h3>
+          <a href="./images/18-Molino_Croce-01.jpg" target="_blank"><img src="./images/18-Molino_Croce-01.jpg" alt="#"></a>
+          <a href="./images/18-Molino_Croce-02.jpg" target="_blank"><img src="./images/18-Molino_Croce-02.jpg" alt="#"></a>
+          <a href="./images/18-Molino_Croce-03.jpg" target="_blank"><img src="./images/18-Molino_Croce-03.jpg" alt="#"></a>
+          <a href="./images/18-Molino_Croce-04.jpg" target="_blank"><img src="./images/18-Molino_Croce-04.jpg" alt="#"></a>
+          <a href="./images/18-Molino_Croce-05.jpg" target="_blank"><img src="./images/18-Molino_Croce-05.jpg" alt="#"></a>
+      </section>
+      <section id="Biana" class="active">
+          <h3>Stazione di Biana</h3>
+          <a href="./images/19-Biana-01.jpg" target="_blank"><img src="./images/19-Biana-01.jpg" alt="#"></a>
+          <a href="./images/19-Biana-02.jpg" target="_blank"><img src="./images/19-Biana-02.jpg" alt="#"></a>
+          <a href="./images/19-Biana-03.jpg" target="_blank"><img src="./images/19-Biana-03.jpg" alt="#"></a>
+          <a href="./images/19-Biana-04.jpg" target="_blank"><img src="./images/19-Biana-04.jpg" alt="#"></a>
+      </section>
+      <section id="Recesio" class="active">
+          <h3>Stazione di Recesio</h3>
+          <a href="./images/20-Recesio-01.jpg" target="_blank"><img src="./images/20-Recesio-01.jpg" alt="#"></a>
+          <a href="./images/20-Recesio-02.jpg" target="_blank"><img src="./images/20-Recesio-02.jpg" alt="#"></a>
+          <a href="./images/20-Recesio-03.jpg" target="_blank"><img src="./images/20-Recesio-03.jpg" alt="#"></a>
+          <a href="./images/20-Recesio-04.jpg" target="_blank"><img src="./images/20-Recesio-04.jpg" alt="#"></a>
+      </section>
+      <section id="Roncovero" class="active">
+          <h3>Fermata di Roncovero</h3>
+          <a href="./images/21-Roncovero-01.jpg" target="_blank"><img src="./images/21-Roncovero-01.jpg" alt="#"></a>
+          <a href="./images/21-Roncovero-02.jpg" target="_blank"><img src="./images/21-Roncovero-02.jpg" alt="#"></a>
+          <a href="./images/21-Roncovero-03.jpg" target="_blank"><img src="./images/21-Roncovero-03.jpg" alt="#"></a>
+      </section>
+      <section id="Bettola" class="active">
+          <h3>Stazione di Bettola</h3>
+          <a href="./images/22-Bettola-01.jpg" target="_blank"><img src="./images/22-Bettola-01.jpg" alt="#"></a>
+          <a href="./images/22-Bettola-02.jpg" target="_blank"><img src="./images/22-Bettola-02.jpg" alt="#"></a>
+          <p>Anni '50.
+          <a href="./images/22-Bettola-16.jpg" target="_blank"><img src="./images/22-Bettola-16.jpg" alt="#"></a>
+          <p>1936
+          <a href="./images/22-Bettola-15.jpg" target="_blank"><img src="./images/22-Bettola-15.jpg" alt="#"></a>
+          <a href="./images/22-Bettola-03.jpg" target="_blank"><img src="./images/22-Bettola-03.jpg" alt="#"></a>
+          <a href="./images/22-Bettola-04.jpg" target="_blank"><img src="./images/22-Bettola-04.jpg" alt="#"></a>
+          <a href="./images/22-Bettola-05.jpg" target="_blank"><img src="./images/22-Bettola-05.jpg" alt="#"></a>
+          <a href="./images/22-Bettola-06.jpg" target="_blank"><img src="./images/22-Bettola-06.jpg" alt="#"></a>
+          <a href="./images/22-Bettola-07.jpg" target="_blank"><img src="./images/22-Bettola-07.jpg" alt="#"></a>
+          <a href="./images/22-Bettola-08.jpg" target="_blank"><img src="./images/22-Bettola-08.jpg" alt="#"></a>
+          <a href="./images/22-Bettola-09.jpg" target="_blank"><img src="./images/22-Bettola-09.jpg" alt="#"></a>
+          <a href="./images/22-Bettola-10.jpg" target="_blank"><img src="./images/22-Bettola-10.jpg" alt="#"></a>
+          <a href="./images/22-Bettola-11.jpg" target="_blank"><img src="./images/22-Bettola-11.jpg" alt="#"></a>
+          <a href="./images/22-Bettola-12.jpg" target="_blank"><img src="./images/22-Bettola-12.jpg" alt="#"></a>
+          <a href="./images/22-Bettola-13.jpg" target="_blank"><img src="./images/22-Bettola-13.jpg" alt="#"></a>
+          <a href="./images/22-Bettola-14.jpg" target="_blank"><img src="./images/22-Bettola-14.jpg" alt="#"></a>
+          <p>Stazione dei tram:
+          <a href="./images/22-Bettola-18.jpg" target="_blank"><img src="./images/22-Bettola-18.jpg" alt="#"></a>
+          <a href="./images/22-Bettola-17.jpg" target="_blank"><img src="./images/22-Bettola-17.jpg" alt="#"></a>
+      </section>
+      <section id="Fonti" class="active">
+          <a id="Fonti"><h3>Fonti dei documenti:</h3></a>
+          <li><a href="https://www.ferrovieabbandonate.it/linea_dismessa.php?id=131"
+            target="_blank" style="color:#00FFFF">"Ferrovia Piacenza Barriera Roma - Bettola"</a>
+            nel sito "Ferrovie Abbandonate".
+          <li><a href="http://www.piacenzantica.it/e107_plugins/coppermine_menu/thumbnails.php?album=4"
+            target="_blank" style="color:#00FFFF">Foto d'epoca</a>
+            e articolo <a href="http://www.piacenzantica.it/page.php?300"
+            target="_blank" style="color:#00FFFF">"Le Tramways Piacentine"</a>
+            nel sito "PiacenzAntica".
+          <li><a href="https://www.ilpiacenza.it/attualita/littorina-rimpianto-valnurese-proviamo-almeno-a-riportare-a-casa-giuditta.html"
+            target="_blank" style="color:#00FFFF">“Littorina, rimpianto valnurese"</a>
+            nel sito "Il Piacenza".
+          <li>Archivio personale di Ferruccio Pizzamiglio, Vigolzone.
+          <li>Archivio di Stato di Palazzo Farnese, Piacenza.
+          <li>"Quando tra Piacenza e Bettola correvano le littorine" nella
+              pubblicazione "La nostra terra in dieci anni (1998-2007) di
+              Bilanci della Banca di Piacenza".
+          <li><a href="https://www.igmi.org/it/geoprodotti/raster/1/JPG300_DPI_edizione_precedente/foglio-1515568552.37"
+            target="_blank" style="color:#00FFFF">Mappa di Piacenza del 1921</a>
+            dell'Istituto Geografico Militare.
+          <li><a href="https://www.ilpiacenza.it/cronaca/l-architettura-militare-ne-la-storia-urbana-di-piacenza-il-sistema-fortificato.html"
+            target="_blank" style="color:#00FFFF">"La storia urbana di Piacenza, il sistema fortificato"</a>
+            di Valeria Poli, presentato nel sito "Il Piacenza".
+      </section>
+  </div>
+
+  <script type="text/javascript">
+
+  	mapboxgl.accessToken = 'pk.eyJ1Ijoicmljcm9jIiwiYSI6ImNpanZyajMxYTBhdmZ0dG01bmVsbG8ybzcifQ.RdmNKeWGLY_fqRmUrM9m4w';
+      var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/ricroc/ckgtl6bx429bc19nnttmdrppi',
+        center: [9.66862, 44.91384],
+        zoom: 10,
+        bearing: 0,
+        pitch: 0
+      });
+
+      var activeChapterName = '';
+
+      map.on('load', function () {
+        map.addSource('google-source', {
+          'type': 'raster',
+          'tiles': ['https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}'],
+          'tileSize': 256
+        });
+        map.addLayer(
+          {
+            'id': 'google-satellite',
+            'type': 'raster',
+            'source': 'google-source',
+            'paint': {"raster-resampling": "linear"}
+          },
+          'Mappa 1921'
+        );
+        var chapterNames = Object.keys(chapters);
+        for (var i = 0; i < chapterNames.length; i++) {
+          var chapterName = chapterNames[i];
+          if (isElementOnScreen(chapterName)) {
+            setActiveChapter(chapterName);
+            break;
+          }
+        }
+      });
+
+      var button1 = document.getElementById( 'HtmlButton1' );
+      button1.onclick = function () {
+        if (button1.className === 'active') {
+          map.setLayoutProperty('Etichette', 'visibility', 'none');
+          button1.className = 'inactive';
+        } else {
+          map.setLayoutProperty('Etichette', 'visibility', 'visible');
+          button1.className = 'active';
+        }
+      };
+
+      var button2 = document.getElementById( 'HtmlButton2' );
+      button2.onclick = function () {
+        if (button2.className === 'active') {
+          map.setLayoutProperty('Grafica', 'visibility', 'none');
+          button2.className = 'inactive';
+        } else {
+          map.setLayoutProperty('Grafica', 'visibility', 'visible');
+          button2.className = 'active';
+        }
+      };
+
+      var button3 = document.getElementById( 'HtmlButton3' );
+      button3.onclick = function () {
+        if (button3.className === 'active') {
+          setVisibilityMappeSIFT('none');
+          button3.className = 'inactive';
+        } else {
+          setVisibilityMappeSIFT('visible');
+          button3.className = 'active';
+        }
+      };
+
+      var button4 = document.getElementById( 'HtmlButton4' );
+      button4.onclick = function () {
+        if (button4.className === 'active') {
+          map.setLayoutProperty('Mappa 1921', 'visibility', 'none');
+          button4.className = 'inactive';
+        } else {
+          map.setLayoutProperty('Mappa 1921', 'visibility', 'visible');
+          button4.className = 'active';
+        }
+      };
+
+      var button5 = document.getElementById( 'HtmlButton5' );
+      button5.onclick = function () {
+        var visibility = map.getLayoutProperty('google-satellite', 'visibility');
+        if (visibility === 'none') {
+          map.setLayoutProperty('google-satellite', 'visibility', 'visible');
+          button5.className = 'active';
+        } else {
+          map.setLayoutProperty('google-satellite', 'visibility', 'none');
+          button5.className = '';
+        }
+      };
+
+      var chapters = {
+        'Ferrovia Piacenza-Bettola':  { center: [9.66862, 44.91384], zoom: 10,   pitch: 0,    bearing: 0,      maps: "basic" },
+        'Stazione di Piacenza':       { center: [9.70618, 45.05098], zoom: 17,   pitch: 60,   bearing: 152,    maps: "satellite+maps", },
+        'Deposito Berzolla':          { center: [9.70773, 45.04801], zoom: 17.4, pitch: 40,   bearing: 155.2,  maps: "satellite+maps", },
+        'Sottopasso Barriera Roma 1': { center: [9.70663, 45.04723], zoom: 18.5, pitch: 60,   bearing: -164,   maps: "satellite+maps", },
+        'Sottopasso Barriera Roma 2': { center: [9.70651, 45.04695], zoom: 17,   pitch: 60,   bearing: 34.5,   maps: "satellite+maps", },
+        'Fermata Barriera Roma':      { center: [9.70572, 45.04620], zoom: 18.5, pitch: 42,   bearing: 132.8,  maps: "satellite+maps", },
+        'Sottopasso Farnesiana':      { center: [9.70517, 45.04542], zoom: 18.3, pitch: 60,   bearing: -139.2, maps: "satellite+maps", },
+        'Stazione Smistamento':       { center: [9.70036, 45.04057], zoom: 15.7, pitch: 60,   bearing: -169.6, maps: "satellite+maps", },
+        'Installazioni Militari':     { center: [9.68305, 45.04340], zoom: 13.2, pitch: 0,    bearing: -155.6, maps: "map25000", },
+        'Cantoniera Torricelle':      { center: [9.68910, 45.02324], zoom: 17,   pitch: 41.5, bearing: -158.4, maps: "satellite+maps", },
+        'Tracce':                     { center: [9.68757, 45.01708], zoom: 17.2, pitch: 49,   bearing: -179.2, maps: "satellite+maps", },
+        'San Bonico':                 { center: [9.68789, 45.01323], zoom: 17.1, pitch: 60,   bearing: 156.8,  maps: "satellite+maps", },
+        'Gariga':                     { center: [9.68524, 44.98217], zoom: 16.6, pitch: 0,    bearing: -177.6, maps: "satellite+maps", },
+        'Podenzano':                  { center: [9.67882, 44.95440], zoom: 15.9, pitch: 0,    bearing: -170.4, maps: "satellite+maps", },
+        'Grazzano':                   { center: [9.67133, 44.93583], zoom: 16.1, pitch: 0,    bearing: 142.4,  maps: "satellite+maps", },
+        'Vigolzone':                  { center: [9.66514, 44.91166], zoom: 14.6, pitch: 0,    bearing: -170.4, maps: "satellite+maps", },
+        'Villo':                      { center: [9.65672, 44.89667], zoom: 16.3, pitch: 0,    bearing: -157.6, maps: "satellite+maps", },
+        'Albarola':                   { center: [9.64889, 44.88369], zoom: 15.2, pitch: 0,    bearing: -172.8, maps: "satellite+maps", },
+        'Cave Ponte':                 { center: [9.64528, 44.87663], zoom: 16.4, pitch: 54,   bearing: -128.8, maps: "satellite+maps", },
+        'Ponte dellOlio':             { center: [9.64710, 44.85955], zoom: 14.4, pitch: 60,   bearing: -177.6, maps: "satellite+maps", },
+        'Riva':                       { center: [9.62811, 44.85553], zoom: 17,   pitch: 51.5, bearing: -138.4, maps: "satellite+maps", },
+        'Molino Croce':               { center: [9.61391, 44.84639], zoom: 16.2, pitch: 60,   bearing: -68.8,  maps: "satellite+maps", },
+        'Biana':                      { center: [9.62023, 44.82379], zoom: 17.4, pitch: 14.5, bearing: -178.4, maps: "satellite+maps", },
+        'Recesio':                    { center: [9.61573, 44.81168], zoom: 17.6, pitch: 16,   bearing: -156.8, maps: "satellite+maps", },
+        'Roncovero':                  { center: [9.60249, 44.79645], zoom: 16.1, pitch: 60,   bearing: -22.4,  maps: "satellite+maps", },
+        'Bettola':                    { center: [9.60829, 44.78062], zoom: 16.6, pitch: 44.5, bearing: 150.4,  maps: "satellite+maps", },
+        'Fonti':                      { center: [9.66862, 44.91384], zoom: 10,   pitch: 0,    bearing: 0,      maps: "basic", },
+      };
+
+      // On every scroll event, check which element is on screen
+      window.onscroll = function () {
+        var chapterNames = Object.keys(chapters);
+        for (var i = 0; i < chapterNames.length; i++) {
+          var chapterName = chapterNames[i];
+          if (isElementOnScreen(chapterName)) {
+            setActiveChapter(chapterName);
+            break;
+          }
+        }
+      };
+
+      function setVisibilityMappeSIFT(visibility) {
+        map.setLayoutProperty('Stazione di Piacenza', 'visibility', visibility);
+        map.setLayoutProperty('Fermata Barriera Roma', 'visibility', visibility);
+        map.setLayoutProperty('Stazione Smistamento', 'visibility', visibility);
+        map.setLayoutProperty('Casa Cantoniera Torricelle', 'visibility', visibility);
+        map.setLayoutProperty('Stazione di Podenzano', 'visibility', visibility);
+        map.setLayoutProperty('Stazione di Grazzano', 'visibility', visibility);
+        map.setLayoutProperty('Stazione di Vigolzone', 'visibility', visibility);
+        map.setLayoutProperty('Fermata Cave Albarola', 'visibility', visibility);
+        map.setLayoutProperty('Stazione di Ponte dellOlio', 'visibility', visibility);
+      }
+
+      function setActiveChapter(chapterName) {
+        if (chapterName === activeChapterName) return;
+        switch(chapters[chapterName].maps) {
+          case "basic":
+            button1.className = 'active'; map.setLayoutProperty('Etichette', 'visibility', 'visible');
+            button2.className = 'active'; map.setLayoutProperty('Grafica', 'visibility', 'visible');
+            button3.className = '';       setVisibilityMappeSIFT('none');
+            button4.className = '';       map.setLayoutProperty('Mappa 1921', 'visibility', 'none');
+            button5.className = '';       map.setLayoutProperty('google-satellite', 'visibility', 'none');
+            break;
+          case "satellite+maps":
+            button1.className = 'active'; map.setLayoutProperty('Etichette', 'visibility', 'visible');
+            button2.className = 'active'; map.setLayoutProperty('Grafica', 'visibility', 'visible');
+            button3.className = 'active'; setVisibilityMappeSIFT('visible');
+            button4.className = '';       map.setLayoutProperty('Mappa 1921', 'visibility', 'none');
+            button5.className = 'active'; map.setLayoutProperty('google-satellite', 'visibility', 'visible');
+            break;
+          case "map25000":
+            button1.className = 'active'; map.setLayoutProperty('Etichette', 'visibility', 'visible');
+            button2.className = 'active'; map.setLayoutProperty('Grafica', 'visibility', 'visible');
+            button3.className = '';       setVisibilityMappeSIFT('none');
+            button4.className = 'active'; map.setLayoutProperty('Mappa 1921', 'visibility', 'visible');
+            button5.className = '';       map.setLayoutProperty('google-satellite', 'visibility', 'none');
+            break;
+        }
+        map.flyTo(chapters[chapterName]);
+        document.getElementById(chapterName).setAttribute('class', 'active');
+        document.getElementById(activeChapterName).setAttribute('class', '');
+        activeChapterName = chapterName;
+      }
+
+      function isElementOnScreen(id) {
+        var element = document.getElementById(id);
+        var bounds = element.getBoundingClientRect();
+        return bounds.top < window.innerHeight && bounds.bottom > 0;
+      }
+
+  </script>
+
+</body>
+</html>
