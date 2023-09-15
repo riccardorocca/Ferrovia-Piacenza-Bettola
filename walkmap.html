@@ -38,9 +38,6 @@
     button.active       {background: #b3b3ff; color: #ffffff;}
     button.active:hover {background: #9999ff; color: #ffffff;}
 
-    #HtmlButton0              {font-weight: bold;}
-    #HtmlButton0.active       {background: #ff8080; color: #ffffff;}
-    #HtmlButton0.active:hover {background: #ff6666; color: #ffffff;}
   </style>
 </head>
 
@@ -48,11 +45,10 @@
   <div id="map"></div>
 
   <div class="menu">
-    <button id="HtmlButton0">Pallini</button>
     <button id="HtmlButton1">Etichette</button>
-    <button id="HtmlButton2">Grafica</button>
-    <button id="HtmlButton3">Mappe SIFT</button>
-    <button id="HtmlButton4">Mappa Forti</button>
+    <button id="HtmlButton0">Pallini / Foto</button>
+    <button id="HtmlButton2">Linee</button>
+    <button id="HtmlButton3">Mappe</button>
     <button id="HtmlButton5">Vista Satellitare</button>
   </div>
 
@@ -126,10 +122,10 @@
             {'type':'Feature','geometry':{'type':'Point','coordinates':[9.656721,44.896928]},'properties':{'foto':"13-Villo-03.jpg",'title':"Stazione Villò 1"}},
             {'type':'Feature','geometry':{'type':'Point','coordinates':[9.656430,44.896455]},'properties':{'foto':"13-Villo-04.jpg",'title':"Stazione Villò 2"}},
             {'type':'Feature','geometry':{'type':'Point','coordinates':[9.649568,44.885348]},'properties':{'foto':"14-Albarola-03.jpg",'title':"Stazione Albarola"}},
-            {'type':'Feature','geometry':{'type':'Point','coordinates':[9.649240,44.882363]},'properties':{'foto':"14-Albarola-02.jpg",'title':"Cavalcavia di Albarola"}},
+            {'type':'Feature','geometry':{'type':'Point','coordinates':[9.649115,44.882425]},'properties':{'foto':"14-Albarola-02.jpg",'title':"Cavalcavia di Albarola"}},
             {'type':'Feature','geometry':{'type':'Point','coordinates':[9.647310,44.876754]},'properties':{'foto':"15-Cave_Ponte-01.jpg",'title':"Cave Albarola 1"}},
             {'type':'Feature','geometry':{'type':'Point','coordinates':[9.646399,44.875942]},'properties':{'foto':"15-Cave_Ponte-02.jpg",'title':"Cave Albarola 2"}},
-            {'type':'Feature','geometry':{'type':'Point','coordinates':[9.645955,44.874435]},'properties':{'foto':"15-Cave_Ponte-03.jpg",'title':"Ponte sul Nure 1"}},
+            {'type':'Feature','geometry':{'type':'Point','coordinates':[9.646006,44.874212]},'properties':{'foto':"15-Cave_Ponte-03.jpg",'title':"Ponte sul Nure 1"}},
             {'type':'Feature','geometry':{'type':'Point','coordinates':[9.646399,44.873715]},'properties':{'foto':"15-Cave_Ponte-04.jpg",'title':"Ponte sul Nure 2"}},
             {'type':'Feature','geometry':{'type':'Point','coordinates':[9.644611,44.873176]},'properties':{'foto':"15-Cave_Ponte-05.jpg",'title':"Ponte sul Nure 3"}},
             {'type':'Feature','geometry':{'type':'Point','coordinates':[9.644686,44.866561]},'properties':{'foto':"16-Ponte_dellOlio-12.jpg",'title':"Stazione Ponte dell'Olio 1"}},
@@ -236,23 +232,11 @@
     button3.className = 'active';
     button3.onclick = function () {
       if (button3.className === 'active') {
-        setVisibilityMappeSIFT('none');
+        setVisibilityMappe('none');
         button3.className = 'inactive';
       } else {
-        setVisibilityMappeSIFT('visible');
+        setVisibilityMappe('visible');
         button3.className = 'active';
-      }
-    };
-
-    var button4 = document.getElementById( 'HtmlButton4' );
-    button4.className = 'inactive';
-    button4.onclick = function () {
-      if (button4.className === 'active') {
-        map.setLayoutProperty('Mappa Forti', 'visibility', 'none');
-        button4.className = 'inactive';
-      } else {
-        map.setLayoutProperty('Mappa Forti', 'visibility', 'visible');
-        button4.className = 'active';
       }
     };
 
@@ -269,7 +253,7 @@
       }
     };
 
-    function setVisibilityMappeSIFT(visibility) {
+    function setVisibilityMappe(visibility) {
       map.setLayoutProperty('Stazione di Piacenza', 'visibility', visibility);
       map.setLayoutProperty('Fermata Barriera Roma', 'visibility', visibility);
       map.setLayoutProperty('Stazione Smistamento', 'visibility', visibility);
@@ -280,6 +264,7 @@
       map.setLayoutProperty('Cave Albarola e Ponte', 'visibility', visibility);
       map.setLayoutProperty('Stazione di Ponte dellOlio', 'visibility', visibility);
       map.setLayoutProperty('Stazione di Bettola', 'visibility', visibility);
+      map.setLayoutProperty('Mappa Forti', 'visibility', visibility);
     }
 
   </script>
