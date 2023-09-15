@@ -48,6 +48,7 @@
   <div id="map"></div>
 
   <div class="menu">
+    <button id="HtmlButton0">Pallini</button>
     <button id="HtmlButton1">Etichette</button>
     <button id="HtmlButton2">Grafica</button>
     <button id="HtmlButton3">Mappe SIFT</button>
@@ -157,9 +158,9 @@
         'source': 'places',
         'layout': {
             'icon-image': 'circle',
-            'icon-allow-overlap': false
+            'icon-allow-overlap': true
         }
-      });
+      }, 'Etichette');
       map.setLayoutProperty('places', 'visibility', 'visible');
 
       map.on('click', 'places', function (e) {
@@ -194,6 +195,18 @@
       });
 
     });
+
+    var button0 = document.getElementById( 'HtmlButton0' );
+    button0.className = 'active';
+    button0.onclick = function () {
+      if (button0.className === 'active') {
+        map.setLayoutProperty('places', 'visibility', 'none');
+        button0.className = 'inactive';
+      } else {
+        map.setLayoutProperty('places', 'visibility', 'visible');
+        button0.className = 'active';
+      }
+    };
 
     var button1 = document.getElementById( 'HtmlButton1' );
     button1.className = 'active';
