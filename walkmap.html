@@ -58,7 +58,7 @@
         container: 'map', // container ID
         // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
         style: 'mapbox://styles/ricroc/ckgtl6bx429bc19nnttmdrppi', // style URL
-        center: [9.646673, 44.871351],
+        center: [9.644751, 44.870946],
         zoom: 14.5
     });
 
@@ -172,13 +172,11 @@
           coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
         }
 
-        var Fotourl = "https://riccardorocca.github.io/Ferrovia-Piacenza-Bettola/images/" + foto;
+        var fotoURL = "https://riccardorocca.github.io/Ferrovia-Piacenza-Bettola/images/" + foto;
 
-        new mapboxgl.Popup({closeButton: false})
-        .setLngLat(coordinates)
-        //.setHTML(description+" - "+urlid)
-        .setHTML('<a href="'+ Fotourl + '" target="_blank">' + title + '</a>')
-        .addTo(map);
+        var newWindow = window.open("https://riccardorocca.github.io/Ferrovia-Piacenza-Bettola/images/" + foto);
+        newWindow.document.title = title;
+
       });
 
       // Change the cursor to a pointer when the mouse is over the places layer.
